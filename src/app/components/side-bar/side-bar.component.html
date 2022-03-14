@@ -1,0 +1,23 @@
+<div class="main-container">
+  <div class="title-container">
+    <i class="bx bx-user-circle"></i>
+  </div>
+  <div class="status-container">
+    <div class="offline"><i class="bx bxs-circle"></i> OFFLINE</div>
+  </div>
+  <div class="login-container" *ngIf="!this.userLogged">
+    <div class="login-button-container">
+      <button (click)="showLoginPopUp()" class="button-20">Sign In</button>
+    </div>
+    <div class="register-button-container">
+      <button (click)="showRegisterPopup()" class="button-20">Register</button>
+    </div>
+
+    <div class="login-pop-up-container" *ngIf="showLoginPopUpVab">
+      <app-user-login></app-user-login>
+      <div class="cancle-pop-up-container">
+        <button (click)="showLoginPopUp()">cancle</button>
+      </div>
+    </div>
+  </div>
+</div>

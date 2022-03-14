@@ -1,0 +1,39 @@
+.main-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: row;
+  .navigation-container {
+    width: 100%;
+    height: min-content;
+  }
+  .router-container {
+    width: 100%;
+    height: min-content;
+  }
+  .side-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 7%;
+    transition: 0.5s;
+    background: rgba(37, 30, 115, 255);
+
+    &:hover {
+      .image-profile-container {
+        width: 50%;
+      }
+      width: 20%;
+      .button-container {
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+        }
+        .text-container {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
