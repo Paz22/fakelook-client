@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  postsUrl :"https://localhost:44349/Posts"
+  postsUrl :"https://localhost:44349/Posts",
+  usersURL :"https://localhost:44349/Register"
+
 };
 
 /*
