@@ -1,5 +1,14 @@
-<input type="text" placeholder="User Name" [(ngModel)]="userInfo.UserName">
-<input type="text" placeholder="Password" [(ngModel)]="userInfo.Password">
-<input type="text" placeholder="Address" [(ngModel)]="userInfo.Address">
+<div class="main-container">
+  <div class="title-container"><h1>Login</h1></div>
+  <div class="form-container">
+    <input
+      type="text"
+      placeholder="User Name"
+      [(ngModel)]="userInfo.UserName"
+    />
+    <input type="text" placeholder="Password" [(ngModel)]="userInfo.Password" />
+    <input type="text" placeholder="Address" [(ngModel)]="userInfo.Address" />
 
-<button (click)="submitUser()">Submit</button>
+    <button (click)="submitUser()">Submit</button>
+  </div>
+</div>
