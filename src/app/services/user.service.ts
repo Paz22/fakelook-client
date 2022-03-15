@@ -14,10 +14,14 @@ export class UserService {
     let httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-    return this.http.post<User>(environment.usersURL, user, httpOptions);
+    return this.http.post<User>(
+      `${environment.usersURL}/Register`,
+      user,
+      httpOptions
+    );
   }
 
   login(user: User): Observable<User> {
-    return this.http.post<User>(environment.usersLoginURL, user);
+    return this.http.post<User>(`${environment.usersURL}/Login`, user);
   }
 }

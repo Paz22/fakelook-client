@@ -12,6 +12,19 @@ export class UserRegistrationComponent implements OnInit {
 
   constructor(private userService: UserService) {
     this.user = {} as User;
+    //TODO:REMOVE:
+    //this.fillDefaultValues();
+  }
+  fillDefaultValues() {
+    this.user.UserName = 'Default';
+    this.user.FirstName = 'Default';
+    this.user.LastName = 'Default';
+    this.user.Password = 'Default';
+    this.user.BirthDate = new Date('0001-01-01');
+    this.user.Workplace = 'Default';
+    this.user.Address = 'Default';
+    this.user.Email = ' Defualt';
+    this.user.ProfilePic = 's';
   }
 
   ngOnInit(): void {}

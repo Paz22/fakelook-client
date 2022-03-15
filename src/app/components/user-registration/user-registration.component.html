@@ -1,16 +1,49 @@
 <div class="main-container">
-  <div class="title-container"><h1>Register</h1></div>
+  <div class="title-container">
+    <h1>Register</h1>
+  </div>
   <div class="form-container">
-    <input type="text" placeholder="Name" [(ngModel)]="user.UserName" />
-    <input type="text" placeholder="First Name" [(ngModel)]="user.FirstName" />
-    <input type="text" placeholder="Last Name" [(ngModel)]="user.LastName" />
-    <input type="text" placeholder="Email" [(ngModel)]="user.Email" />
-    <input type="text" placeholder="BirthDate" [(ngModel)]="user.BirthDate" />
-    <input type="text" placeholder="Img" [(ngModel)]="user.ProfilePic" />
-    <input type="text" placeholder="Password" [(ngModel)]="user.Password" />
-    <input type="text" placeholder="Address" [(ngModel)]="user.Address" />
-    <input type="text" placeholder="Work Place" [(ngModel)]="user.Workplace" />
-
-    <button (click)="submitUser()">Submit</button>
+    <label for="name"
+      ><i class="bx bx-user"></i>
+      <input type="text" placeholder="User Name" [(ngModel)]="user.UserName"
+    /></label>
+    <label for="Password"
+      ><i class="bx bx-lock-alt"></i>
+      <input type="text" placeholder="Password" [(ngModel)]="user.Password"
+    /></label>
+    <label for="FirstName"
+      ><i class="bx bx-user"></i>
+      <input type="text" placeholder="First Name" [(ngModel)]="user.FirstName"
+    /></label>
+    <label for="LastName"
+      ><i class="bx bx-user"></i>
+      <input type="name" placeholder="Last Name" [(ngModel)]="user.LastName"
+    /></label>
+    <label for="Email"
+      ><i class="bx bx-envelope"></i>
+      <input type="email" placeholder="Email" [(ngModel)]="user.Email"
+    /></label>
+    <label for="Date"
+      ><i class="bx bx-calendar"></i>
+      <input type="datetime" placeholder="Date" [(ngModel)]="user.BirthDate"
+    /></label>
+    <label for="ProfilePic"
+      ><i class="bx bx-image-alt"></i>
+      <input
+        type="name"
+        placeholder="Profile Image"
+        [(ngModel)]="user.ProfilePic"
+    /></label>
+    <label for="Address"
+      ><i class="bx bx-current-location"></i>
+      <input type="name" placeholder="Address" [(ngModel)]="user.Address"
+    /></label>
+    <label for="Workplace"
+      ><i class="bx bx-briefcase-alt"></i>
+      <input type="name" placeholder="Work Place" [(ngModel)]="user.Workplace"
+    /></label>
+    <div class="button-container">
+      <button (click)="submitUser()">Submit</button>
+    </div>
   </div>
 </div>
