@@ -12,6 +12,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './components/main/main.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 const routes: Routes = [{ path: 'main', component: MainComponent }];
 
@@ -23,6 +24,7 @@ const routes: Routes = [{ path: 'main', component: MainComponent }];
     SideBarComponent,
     MainComponent,
     UserRegistrationComponent,
+    NewPostComponent,
   ],
   imports: [
     BrowserModule,
