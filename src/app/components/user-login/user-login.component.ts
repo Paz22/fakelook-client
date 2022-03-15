@@ -16,9 +16,17 @@ export class UserLoginComponent implements OnInit {
   submitUser() {
     console.log(this.userInfo);
 
-    this.userService.login(this.userInfo).subscribe((result) => {
-      console.log(result);
-    });
+    this.userService.login(this.userInfo).subscribe(
+      (result) => {
+        this.saveToken(result);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+  saveToken(result: any) {
+    localStorage.setItem('token', result.token);
   }
   ngOnInit(): void {}
 }

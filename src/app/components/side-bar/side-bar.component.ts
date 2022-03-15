@@ -11,26 +11,36 @@ import { UserRegistrationComponent } from '../user-registration/user-registratio
 export class SideBarComponent implements OnInit {
   userLogged: boolean;
   showLoginPopUpVab: boolean;
+  userLoggedIn: boolean;
   constructor(public dialog: MatDialog) {
     this.userLogged = false;
     this.showLoginPopUpVab = false;
+    this.userLoggedIn = false;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.checkIfUserIsLogged();
+  }
+  checkIfUserIsLogged() {
+    if (localStorage.getItem('token')) {
+      this.userLoggedIn = true;
+    } else this.userLoggedIn = false;
+  }
 
   showLoginPopUp() {
     const dialogRef = this.dialog.open(UserLoginComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
+      this.checkIfUserIsLogged();
     });
   }
 
-  showRegisterPopup() {
+  showRegisterPopUp() {
     const dialogRef = this.dialog.open(UserRegistrationComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
+      this.checkIfUserIsLogged();
     });
   }
 }

@@ -1,23 +1,56 @@
 <div class="main-container">
+  <div class="container title">
+    <i class="bx bxs-user-circle"></i>
+  </div>
+  <div class="container status">
+    <div class="offline" *ngIf="!userLoggedIn">
+      <i class="bx bxs-circle"></i> OFFLINE
+    </div>
+    <div class="online" *ngIf="userLoggedIn">
+      <i class="bx bxs-circle"></i> ONLINE
+    </div>
+  </div>
+  <div
+    class="button-container account"
+    *ngIf="!userLoggedIn"
+    (click)="showLoginPopUp()"
+  >
+    <div class="icon-container"><i class="bx bx-log-in-circle"></i></div>
+    <div class="text-container">Login</div>
+  </div>
+  <div
+    class="button-container account"
+    *ngIf="!userLoggedIn"
+    (click)="showRegisterPopUp()"
+  >
+    <div class="icon-container"><i class="bx bx-user-plus"></i></div>
+    <div class="text-container">Register</div>
+  </div>
+</div>
+
+<!-- <div class="main-container">
   <div class="title-container">
     <i class="bx bx-user-circle"></i>
   </div>
   <div class="status-container">
-    <div class="offline"><i class="bx bxs-circle"></i> OFFLINE</div>
+    <div class="offline" *ngIf="!userLoggedIn">
+      <i class="bx bxs-circle"></i> OFFLINE
+    </div>
+    <div class="online" *ngIf="userLoggedIn">
+      <i class="bx bxs-circle"></i> ONLINE
+    </div>
   </div>
-  <div class="login-container" *ngIf="!this.userLogged">
-    <div class="login-button-container">
-      <button (click)="showLoginPopUp()" class="button-20">Sign In</button>
-    </div>
-    <div class="register-button-container">
-      <button (click)="showRegisterPopup()" class="button-20">Register</button>
-    </div>
 
-    <div class="login-pop-up-container" *ngIf="showLoginPopUpVab">
-      <app-user-login></app-user-login>
-      <div class="cancle-pop-up-container">
-        <button (click)="showLoginPopUp()">cancle</button>
-      </div>
+  <div class="icon-container"><i class="bx bxs-user"></i></div>
+  <div class="text-container">Sign In</div>
+  <div class="register-button-container">
+    <button (click)="showRegisterPopup()">Register</button>
+  </div>
+
+  <div class="button-container register" *ngIf="showLoginPopUpVab">
+    <app-user-login></app-user-login>
+    <div class="cancle-pop-up-container">
+      <button (click)="showLoginPopUp()">cancle</button>
     </div>
   </div>
-</div>
+</div> -->
