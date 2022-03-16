@@ -13,6 +13,8 @@ import { MainComponent } from './components/main/main.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { AngularCesiumWidgetsModule } from 'angular-cesium';
+import { AngularCesiumModule } from 'angular-cesium';
 
 const routes: Routes = [{ path: 'main', component: MainComponent }];
 
@@ -34,6 +36,8 @@ const routes: Routes = [{ path: 'main', component: MainComponent }];
     HttpClientModule,
     MatDialogModule,
     RouterModule.forRoot(routes),
+    AngularCesiumModule.forRoot(),
+    AngularCesiumWidgetsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -21,7 +21,7 @@ export class UserService {
     );
   }
 
-  login(user: User): Observable<User> {
-    return this.http.post<User>(`${environment.usersURL}/Login`, user);
+  login(user: User): Observable<any> {
+    return this.http.post<any>(`${environment.usersURL}/Login`, user);
   }
 }
