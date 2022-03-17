@@ -14,3 +14,34 @@
     word-wrap: break-word;
   }
 }
+
+.form-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 4px;
+  color: #707070;
+  .button {
+    i {
+      color: whitesmoke;
+    }
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    color: blue;
+  }
+}
+::ng-deep .mat-raised-button:hover {
+  color: #3f51b5;
+  background-color: whitesmoke;
+}
+.spinner-container {
+  min-height: 100px;
+}
+.error-container {
+  color: red;
+  min-height: 20px;
+}

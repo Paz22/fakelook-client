@@ -1,14 +1,27 @@
 <div class="main-container">
   <div class="title-container"><h1>Login</h1></div>
-  <div class="form-container">
-    <input
-      type="text"
-      placeholder="User Name"
-      [(ngModel)]="userInfo.UserName"
-    />
-    <input type="text" placeholder="Password" [(ngModel)]="userInfo.Password" />
-    <input type="text" placeholder="Address" [(ngModel)]="userInfo.Address" />
-
-    <button (click)="submitUser()">Submit</button>
+  <div class="form-container" *ngIf="!loading">
+    <mat-form-field class="example-full-width" appearance="legacy">
+      <mat-label>User Name</mat-label>
+      <input type="text" matInput [(ngModel)]="userInfo.UserName" />
+      <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="legacy">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [(ngModel)]="userInfo.Password" />
+      <i class="mdi mdi-1emp mdi-lock-outline form-icon" matSuffix></i>
+    </mat-form-field>
+    <div class="button-container">
+      <button (click)="submitUser()" mat-raised-button color="primary">
+        Submit
+        <i class="mdi mdi-1emp mdi-send-outline" matSuffix></i>
+      </button>
+    </div>
+    <div class="spinner-container" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
   </div>
+</div>
+<div class="error-container">
+  {{ errorMessage }}
 </div>

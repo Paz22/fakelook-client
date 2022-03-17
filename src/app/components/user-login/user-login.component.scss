@@ -8,12 +8,11 @@
       font-weight: bold;
     }
   }
-  .form-container input {
+  .form-container {
     display: flex;
     flex-direction: column;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
+  }
+  .form-container input {
     input {
       width: 80%;
       margin: 20px;
@@ -22,4 +21,12 @@
       outline: none;
     }
   }
+  .button-container {
+    display: flex;
+    justify-content: center;
+  }
+}
+.error-container {
+  color: red;
+  min-height: 20px;
 }
