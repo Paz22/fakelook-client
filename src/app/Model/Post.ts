@@ -1,13 +1,12 @@
-
-export default interface Post
-{
-    Description :string,
-    ImageSorce:string
-    X_Position:number, 
-    Y_Position:number,
-    Z_Position :number,
-    Date :Date,
-    UserId :number,
-    IsEdited :boolean,
-    PermissionLevel:number 
-};
+export default interface Post {
+  id: number;
+  Description: string;
+  ImageSorce: string;
+  x_Position: number;
+  y_Position: number;
+  z_Position: number;
+  Date: Date;
+  UserId: number;
+  IsEdited: boolean;
+  PermissionLevel: number;
+}

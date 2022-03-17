@@ -10,11 +10,11 @@ import User from '../Model/User';
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  addUser(user: User): Observable<User> {
+  addUser(user: User): Observable<any> {
     let httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
     };
-    return this.http.post<User>(
+    return this.http.post<any>(
       `${environment.usersURL}/Register`,
       user,
       httpOptions

@@ -10,12 +10,13 @@ import Post from '../Model/Post';
 export class PostService {
   constructor(private http: HttpClient) {}
 
-  getAllPosts(): Observable<any> {
+  getAllPosts(): Observable<Post[]> {
+    console.log('jere');
     const currentUrl = 'https://localhost:44349/api/PostsAPI/GetAll';
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken(),
     });
-    return this.http.get<any>(currentUrl, { headers });
+    return this.http.get<Post[]>(currentUrl, { headers });
   }
 
   newPost(post: Post): Observable<Post> {

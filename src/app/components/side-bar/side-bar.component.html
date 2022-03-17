@@ -26,6 +26,14 @@
     <div class="icon-container"><i class="bx bx-user-plus"></i></div>
     <div class="text-container">Register</div>
   </div>
+  <div
+    class="button-container account"
+    *ngIf="userLoggedIn"
+    (click)="showRegisterPopUp()"
+  >
+    <div class="icon-container"><i class="bx bx-message-add"></i></div>
+    <div class="text-container">New Post</div>
+  </div>
 </div>
 
 <!-- <div class="main-container">

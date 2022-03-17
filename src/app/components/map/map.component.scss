@@ -1,16 +1,3 @@
-.main-container {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  .map-container {
-    width: 50%;
-    border-radius: 10px;
-    height: 100%;
-    overflow: hidden;
-    position: relative;
-  }
-}
 .map-post {
   width: 5vw;
   background-color: aliceblue;
