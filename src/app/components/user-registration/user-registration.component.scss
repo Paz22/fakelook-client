@@ -45,3 +45,24 @@
   color: red;
   min-height: 20px;
 }
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  img {
+    width: 30%;
+  }
+  display: inline-block;
+  cursor: pointer;
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+.img-container {
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

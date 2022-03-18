@@ -1,38 +1,74 @@
 <div class="main-container">
-  <div class="container title">
-    <i class="bx bxs-user-circle"></i>
-  </div>
-  <div class="container status">
-    <div class="offline" *ngIf="!userLoggedIn">
-      <i class="bx bxs-circle"></i> OFFLINE
+  <div class="first-section-container">
+    <div class="container title">
+      <i class="bx bxs-user-circle"></i>
     </div>
-    <div class="online" *ngIf="userLoggedIn">
-      <i class="bx bxs-circle"></i> ONLINE
+    <div class="container status">
+      <div class="offline" *ngIf="!userLoggedIn">
+        <i class="bx bxs-circle"></i> OFFLINE
+      </div>
+      <div class="online" *ngIf="userLoggedIn">
+        <i class="bx bxs-circle"></i> ONLINE
+      </div>
     </div>
   </div>
-  <div
-    class="button-container account"
-    *ngIf="!userLoggedIn"
-    (click)="showLoginPopUp()"
-  >
-    <div class="icon-container"><i class="bx bx-log-in-circle"></i></div>
-    <div class="text-container">Login</div>
-  </div>
-  <div
-    class="button-container account"
-    *ngIf="!userLoggedIn"
-    (click)="showRegisterPopUp()"
-  >
-    <div class="icon-container"><i class="bx bx-user-plus"></i></div>
-    <div class="text-container">Register</div>
-  </div>
-  <div
-    class="button-container account"
-    *ngIf="userLoggedIn"
-    (click)="showRegisterPopUp()"
-  >
-    <div class="icon-container"><i class="bx bx-message-add"></i></div>
-    <div class="text-container">New Post</div>
+  <div class="second-section-container">
+    <div
+      class="button-container account"
+      *ngIf="!userLoggedIn"
+      (click)="showLoginPopUp()"
+    >
+      <div class="icon-container"><i class="bx bx-log-in-circle"></i></div>
+      <div class="text-container">Login</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="!userLoggedIn"
+      (click)="showRegisterPopUp()"
+    >
+      <div class="icon-container"><i class="bx bx-user-plus"></i></div>
+      <div class="text-container">Register</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="userLoggedIn"
+      (click)="showRegisterPopUp()"
+    >
+      <div class="icon-container"><i class="bx bx-message-add"></i></div>
+      <div class="text-container">New Post</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="userLoggedIn"
+      (click)="navigateToMap()"
+    >
+      <div class="icon-container"><i class="bx bx-world"></i></div>
+      <div class="text-container">Map</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="userLoggedIn"
+      (click)="navigateToMap()"
+    >
+      <div class="icon-container"><i class="bx bx-list-ul"></i></div>
+      <div class="text-container">Feed</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="userLoggedIn"
+      (click)="signOutUser()"
+    >
+      <div class="icon-container"><i class="bx bx-cog"></i></div>
+      <div class="text-container">Settings</div>
+    </div>
+    <div
+      class="button-container account"
+      *ngIf="userLoggedIn"
+      (click)="signOutUser()"
+    >
+      <div class="icon-container"><i class="bx bx-log-out-circle"></i></div>
+      <div class="text-container">Log Out</div>
+    </div>
   </div>
 </div>
 

@@ -30,13 +30,14 @@ export class UserLoginComponent implements OnInit {
     this.userService.login(this.userInfo).subscribe(
       (result) => {
         this.signInUser(result.token);
+        this.isLoading(false);
       },
       (error) => {
         console.log(error);
         this.errorMessage = error.error.detail;
+        this.isLoading(false);
       }
     );
-    this.isLoading(false);
   }
 
   signInUser(token: any) {
@@ -51,10 +52,5 @@ export class UserLoginComponent implements OnInit {
   resetMassage() {
     this.errorMessage = '';
   }
-  ngOnInit(): void {
-    this.softGuard()
-  }
-  softGuard() {
-    if(!localStorage.getItem('token'))
-  }
+  ngOnInit(): void {}
 }

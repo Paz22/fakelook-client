@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import User from 'src/app/Model/User';
@@ -14,6 +14,10 @@ export class UserRegistrationComponent implements OnInit {
   user: User;
   errorMessage: string;
   loading: boolean;
+  file: any;
+  @ViewChild('imgPreview') formImagePreview!: any;
+  @ViewChild('input[type=file]') formImageInput!: any;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -33,15 +37,17 @@ export class UserRegistrationComponent implements OnInit {
       this.userService.addUser(this.user).subscribe(
         (result) => {
           this.signInUser(result.token);
+          this.isLoading(false);
         },
         (error) => {
           this.errorMessage = error.error.detail;
+          this.isLoading(false);
         }
       );
     } else {
       this.errorMessage = validate.message;
+      this.isLoading(false);
     }
-    this.isLoading(false);
   }
   isLoading(arg0: boolean) {
     this.loading = arg0;
@@ -54,5 +60,23 @@ export class UserRegistrationComponent implements OnInit {
 
   resetMassage() {
     this.errorMessage = '';
+  }
+  changeFile(): void {
+    const preview = this.formImagePreview;
+    const file = this.formImageInput.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener(
+      'load',
+      function () {
+        // convert image file to base64 string
+        preview.src = reader.result;
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   }
 }
