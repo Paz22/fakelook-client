@@ -25,8 +25,12 @@ import { AngularCesiumModule } from 'angular-cesium';
 import { MapComponent } from './components/map/map.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PostsFeedComponent } from './components/posts-feed/posts-feed.component';
+import { HomeComponent } from './components/home/home.component';
 
-const routes: Routes = [{ path: 'main', component: MainComponent }];
+const routes: Routes = [
+  { path: 'main', component: MainComponent },
+  { path: 'feed', component: PostsFeedComponent },
+];
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ const routes: Routes = [{ path: 'main', component: MainComponent }];
     NewPostComponent,
     MapComponent,
     PostsFeedComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
