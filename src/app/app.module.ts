@@ -24,6 +24,7 @@ import { AngularCesiumWidgetsModule } from 'angular-cesium';
 import { AngularCesiumModule } from 'angular-cesium';
 import { MapComponent } from './components/map/map.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PostsFeedComponent } from './components/posts-feed/posts-feed.component';
 
 const routes: Routes = [{ path: 'main', component: MainComponent }];
 
@@ -37,6 +38,7 @@ const routes: Routes = [{ path: 'main', component: MainComponent }];
     UserRegistrationComponent,
     NewPostComponent,
     MapComponent,
+    PostsFeedComponent,
   ],
   imports: [
     BrowserModule,
