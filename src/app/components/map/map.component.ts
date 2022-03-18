@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AcNotification,
   ActionType,
@@ -21,7 +22,8 @@ export class MapComponent implements OnInit {
   showDialog = false;
   constructor(
     private postService: PostService,
-    private viewerConf: ViewerConfiguration
+    private viewerConf: ViewerConfiguration,
+    private router: Router
   ) {
     viewerConf.viewerOptions = {
       selectionIndicator: false,
@@ -59,6 +61,7 @@ export class MapComponent implements OnInit {
     );
   }
   ngOnInit(): void {
+    this.softGuard();
     this.initList();
   }
   initList() {
@@ -70,5 +73,10 @@ export class MapComponent implements OnInit {
   }
   closeDialog(): void {
     this.showDialog = false;
+  }
+  softGuard() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['/']);
+    }
   }
 }
