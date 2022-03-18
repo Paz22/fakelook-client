@@ -1,6 +1,7 @@
 .main-container {
   display: flex;
-
+  animation-duration: 3s;
+  animation-name: sidebarTransformer;
   flex-direction: column;
   font-weight: bolder;
   .container {
@@ -60,9 +61,8 @@
     font-size: 4vmin;
   }
   &:hover {
-    background-color: rgba(255, 255, 255, 0.5);
-    border-left: 1px solid #1778f2;
-    border-radius: 15px 15px 15px 15px;
+    box-shadow: 2px 2px 6px 0px lightgrey;
+
     cursor: pointer;
     color: #1778f2;
     .text-container {
@@ -75,9 +75,7 @@
 }
 
 .first-section-container {
-  background-color: white;
   border-radius: 15px;
-  box-shadow: 2px 2px 6px 0px lightgrey;
   margin-left: 10px;
   margin-bottom: 10px;
   display: flex;
@@ -86,14 +84,23 @@
 }
 
 .second-section-container {
-  background-color: white;
   border-radius: 15px;
   margin-left: 10px;
   display: flex;
-  box-shadow: 2px 2px 6px 0px lightgrey;
 
   flex-direction: column;
   &:hover {
     border-radius: 15px;
+  }
+}
+@keyframes sidebarTransformer {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

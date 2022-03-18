@@ -42,7 +42,7 @@ export class UserLoginComponent implements OnInit {
 
   signInUser(token: any) {
     localStorage.setItem('token', token);
-    this.router.navigate(['/main']);
+    this.router.navigate(['/feed']);
     this.dialogRef.closeAll();
   }
   isLoading(arg0: boolean) {

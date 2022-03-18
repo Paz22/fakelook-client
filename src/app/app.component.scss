@@ -21,7 +21,8 @@
   }
   .router-container {
     width: 100%;
-
+    animation-duration: 1s;
+    animation-duration: routerTransformer;
     height: 80%;
   }
   .side-bar-container {
@@ -44,5 +45,17 @@
         }
       }
     }
+  }
+}
+
+@keyframes routerTransformer {
+  0% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }

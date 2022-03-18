@@ -1,1 +1,55 @@
-<p>posts-feed works!</p>
+<div class="main-container">
+  <div class="posts-container">
+    <div class="page-title">My Friends Post's</div>
+    <!-- <div class="post">
+      <div class="post-info">
+        <div class="post-writer-image">
+          <img src="../../../assets/Images/user-login-avatar.png" alt="" />
+        </div>
+      </div>
+      <div class="post-body">
+        <div class="post-image">
+          <img src="../../../assets/Images/user-login-avatar.png" alt="" />
+        </div>
+        <div class="post-desc">sd</div>
+      </div>
+    </div> -->
+    <div class="blog_post" *ngFor="let post of posts">
+      <div class="img_pod">
+        <img
+          src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"
+          alt=""
+        />
+      </div>
+      <div class="img-post" *ngIf="post.imageSorce">
+        <img src="{{ post.imageSorce }}" alt="" />
+      </div>
+      <h3>{{ post.date | date: "mediumDate" }}</h3>
+      <p>
+        {{ post.description }}
+      </p>
+      <div class="infos-container">
+        <div class="info-container">
+          <button
+            mat-icon-button
+            color="warn"
+            aria-label="Example icon button with a heart icon"
+          >
+            <i class="bx bxs-heart"></i>
+            {{ post.likes.length }}
+          </button>
+        </div>
+        <div class="info-container">
+          <button
+            mat-icon-button
+            color="primary"
+            aria-label="Example icon button with a home icon"
+          >
+            <i class="bx bx-chat"></i> {{ post.likes.length }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="friends-list-container">asdjkn</div>
+</div>

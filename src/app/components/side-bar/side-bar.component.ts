@@ -48,6 +48,9 @@ export class SideBarComponent implements OnInit {
   navigateToMap() {
     this.router.navigate(['/main']);
   }
+  navigateToFeed() {
+    this.router.navigate(['/feed']);
+  }
   signOutUser() {
     localStorage.clear();
     this.router.navigate(['/']);
