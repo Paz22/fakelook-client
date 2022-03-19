@@ -26,8 +26,10 @@ import { MapComponent } from './components/map/map.component';
 import { MatNativeDateModule } from '@angular/material/core';
 import { PostsFeedComponent } from './components/posts-feed/posts-feed.component';
 import { HomeComponent } from './components/home/home.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -65,6 +67,7 @@ const routes: Routes = [
     MatMomentDateModule,
     MatInputModule,
     MatIconModule,
+    MatSnackBarModule,
     MatButtonModule,
     MatProgressSpinnerModule,
   ],
