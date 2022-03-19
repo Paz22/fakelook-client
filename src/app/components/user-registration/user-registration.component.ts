@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import User from 'src/app/Model/User';
 import { UserService } from 'src/app/services/user.service';
@@ -21,7 +22,8 @@ export class UserRegistrationComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.user = {} as User;
     this.errorMessage = '';
@@ -37,6 +39,7 @@ export class UserRegistrationComponent implements OnInit {
       this.userService.addUser(this.user).subscribe(
         (result) => {
           this.signInUser(result.token);
+
           this.isLoading(false);
         },
         (error) => {
@@ -53,6 +56,8 @@ export class UserRegistrationComponent implements OnInit {
     this.loading = arg0;
   }
   signInUser(token: any) {
+    this.showPopupMessage('Register Succefully');
+
     localStorage.setItem('token', token);
     this.router.navigate(['/main']);
     this.dialogRef.closeAll();
@@ -61,6 +66,15 @@ export class UserRegistrationComponent implements OnInit {
   resetMassage() {
     this.errorMessage = '';
   }
+  showPopupMessage(result: string) {
+    this._snackBar.open(result, 'Dismiss', {
+      duration: 3000,
+      panelClass: ['blue-snackbar'],
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+    });
+  }
+
   changeFile(): void {
     const preview = this.formImagePreview;
     const file = this.formImageInput.files[0];

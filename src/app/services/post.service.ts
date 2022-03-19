@@ -12,7 +12,7 @@ export class PostService {
 
   getAllPosts(): Observable<Post[]> {
     console.log('jere');
-    const currentUrl = 'https://localhost:44349/api/PostsAPI/GetAll';
+    const currentUrl = `${environment.postsUrl}/GetAllPosts`;
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + this.getToken(),
     });

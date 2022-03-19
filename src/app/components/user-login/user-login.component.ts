@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import User from 'src/app/Model/User';
 import { UserService } from 'src/app/services/user.service';
@@ -17,7 +18,8 @@ export class UserLoginComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    private _snackBar: MatSnackBar
   ) {
     this.userInfo = {} as User;
     this.loading = false;
@@ -31,6 +33,7 @@ export class UserLoginComponent implements OnInit {
       (result) => {
         this.signInUser(result.token);
         this.isLoading(false);
+        this.showPopupMessage('Login Succefully');
       },
       (error) => {
         console.log(error);
@@ -38,6 +41,14 @@ export class UserLoginComponent implements OnInit {
         this.isLoading(false);
       }
     );
+  }
+  showPopupMessage(result: string) {
+    this._snackBar.open(result, 'Dismiss', {
+      duration: 3000,
+      panelClass: ['blue-snackbar'],
+      horizontalPosition: 'start',
+      verticalPosition: 'bottom',
+    });
   }
 
   signInUser(token: any) {
