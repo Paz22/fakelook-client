@@ -1,3 +1,11 @@
-<input type="text" placeholder="Description" [(ngModel)]="post.Description" />
-<input type="text" placeholder="ImageSorce" [(ngModel)]="post.imageSorce" />
-<button (click)="addNewPost()">Submit</button>
+<div id="addNewPost">
+    <form>
+        <input type="text" placeholder="Description" [(ngModel)]="post.Description" />
+        <br>
+        <input type="text" placeholder="ImageSorce" [(ngModel)]="post.imageSorce" />
+        <br>
+        <button (click)="addNewpost()">Submit</button>
+    </form>
+</div>
+    
+

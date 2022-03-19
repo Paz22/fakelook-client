@@ -19,8 +19,20 @@ export class PostService {
     return this.http.get<Post[]>(currentUrl, { headers });
   }
 
+  //deletePost(post:Post):Observable<Post>
+  //{
+  //  const headers=new HttpHeaders({
+  //    Authorization:'Bearer'+this.getToken(),});
+  //    return this.http.delete<Post>(`${environment.postsUrl}/api/PostsAPI`,{headers},post.id);
+  //}
+  
+
   newPost(post: Post): Observable<Post> {
     return this.http.post<Post>(`${environment.postsUrl}/api/PostsAPI`, post);
+  }
+
+  editPost(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${environment.postsUrl}/api/PostsAPI`, post);
   }
   private getToken(): string | null {
     return localStorage.getItem('token');
