@@ -51,6 +51,7 @@ export class UserLoginComponent implements OnInit {
   }
 
   signInUser(result: any) {
+    console.log(result);
     localStorage.setItem('token', result.token);
     localStorage.setItem('id', result.id);
     localStorage.setItem('name', result.userName),

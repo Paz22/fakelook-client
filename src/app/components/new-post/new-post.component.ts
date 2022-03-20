@@ -101,7 +101,6 @@ export class NewPostComponent implements OnInit {
       this.currXPos = data.coords.longitude;
       this.currYPos = data.coords.latitude;
       this.currZPos = data.coords.altitude;
-      this.post.userId = 1;
       this.post.x_Position = this.currXPos;
       this.post.y_Position = this.currYPos;
       this.post.z_Position = 32.0852999;
@@ -117,7 +116,8 @@ export class NewPostComponent implements OnInit {
         var currDate = new Date();
         this.datePipe.transform(currDate, 'yyyy-mm-dd');
         this.post.Date = currDate;
-        this.post.userId = parseInt(localStorage.getItem('id') || '1');
+        this.post.userId = parseInt(localStorage.getItem('id') || '0');
+
         this.post.IsEdited = false;
         this.post.PermissionLevel = 1;
         this.post.imageSorce = this.imgSrc;

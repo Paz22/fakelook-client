@@ -14,7 +14,11 @@
         <div class="post-desc">sd</div>
       </div>
     </div> -->
-    <div class="blog_post" *ngFor="let post of posts">
+    <div
+      class="blog_post"
+      (click)="postChosen(post)"
+      *ngFor="let post of posts"
+    >
       <div class="img_pod">
         <img
           src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"

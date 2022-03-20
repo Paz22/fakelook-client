@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import Post from 'src/app/Model/Post';
 import { PostService } from 'src/app/services/post.service';
+import { RouterLinkService } from 'src/app/services/router-link.service';
 import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
@@ -10,7 +11,11 @@ import { EditPostComponent } from '../edit-post/edit-post.component';
   styleUrls: ['./posts-feed.component.scss'],
 })
 export class PostsFeedComponent implements OnInit {
-  constructor(private postService: PostService, public dialog: MatDialog) {}
+  constructor(
+    private postService: PostService,
+    public dialog: MatDialog,
+    private routerLinkService: RouterLinkService
+  ) {}
   posts!: any[];
   currPost: any;
   currUserName!: string | null;
@@ -18,6 +23,12 @@ export class PostsFeedComponent implements OnInit {
   ngOnInit(): void {
     this.initList();
     this.currUserName = localStorage.getItem('userName');
+    this.listenToNewPost();
+  }
+  listenToNewPost() {
+    this.routerLinkService.postChange.subscribe((event) => {
+      if (event) this.initList();
+    });
   }
   initList() {
     this.postService.getAllPosts().subscribe(
@@ -43,4 +54,6 @@ export class PostsFeedComponent implements OnInit {
       this.postService.editPost(res);
     });
   }
+
+  postChosen(post: Post) {}
 }
