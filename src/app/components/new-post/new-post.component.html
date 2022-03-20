@@ -1,11 +1,108 @@
-<div id="addNewPost">
-    <form>
-        <input type="text" placeholder="Description" [(ngModel)]="post.Description" />
-        <br>
-        <input type="text" placeholder="ImageSorce" [(ngModel)]="post.imageSorce" />
-        <br>
-        <button (click)="addNewpost()">Submit</button>
-    </form>
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
 </div>
-    
+<div class="form-container" *ngIf="!loading">
+  <div class="img-container">
+    <div class="image-container">
+      <label class="custom-file-upload">
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          id="img"
+          #imgInput
+          (change)="showFilePreview($event)"
+        />
+        <img #imgPreview [src]="imgSrc" alt="" />
+      </label>
+    </div>
+  </div>
+  <div class="inputs-container">
+    <h1>New Post</h1>
+    <div class="form-inputs">
+      <!-- <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Description</mat-label>
+        <textarea
+          [(ngModel)]="post.Description"
+          matInput
+          placeholder="This Is My Post"
+          [matAutocomplete]="auto"
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          (matChipInputTokenEnd)="add($event)"
+        ></textarea>
+      </mat-form-field> -->
 
+      <mat-form-field class="example-chip-list" appearance="legacy">
+        <mat-label>Description</mat-label>
+        <mat-chip-list #chipList aria-label="Tags selection">
+          <mat-chip *ngFor="let tag of tags" (removed)="remove(tag)">
+            {{ tag }}
+            <button matChipRemove>
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            placeholder="Description"
+            [(ngModel)]="post.Description"
+            (keyup)="inputChanged($event)"
+            #tagInput
+            [formControl]="tagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="addNewpost()">
+        Add Post
+      </button>
+    </div>
+  </div>
+
+  <!-- <div class="main-container">
+  <div class="left-section-container">
+    <div class="form-inputs">
+      <input
+        class="resizedTextbox"
+        type="text"
+        placeholder="Description"
+        [(ngModel)]="post.Description"
+      />
+    </div>
+    <div id="addNewPost">
+      <input
+        type="file"
+        (change)="showFilePreview($event)"
+        placeholder="ImageSorce"
+      />
+      <button mat-raised-button color="primary" (click)="addNewpost()">
+        Add Post
+      </button>
+    </div>
+  </div>
+  <div class="image-container">
+    <label class="custom-file-upload">
+      <input
+        type="file"
+        accept="image/png, image/jpeg"
+        id="img"
+        #imgInput
+        (change)="showFilePreview($event)"
+      />
+      <img #imgPreview [src]="imgSrc" alt="" />
+
+       <img #imgPreview [src]="imgPreview" alt="" /> -->
+  <!-- </label>
+  </div>
+</div> -->
+</div>

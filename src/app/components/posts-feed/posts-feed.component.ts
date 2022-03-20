@@ -10,17 +10,16 @@ import { EditPostComponent } from '../edit-post/edit-post.component';
   styleUrls: ['./posts-feed.component.scss'],
 })
 export class PostsFeedComponent implements OnInit {
-  constructor(private postService: PostService,public dialog:MatDialog) {}
+  constructor(private postService: PostService, public dialog: MatDialog) {}
   posts!: any[];
-  currPost:any;
-  currUserName!:string|null;
+  currPost: any;
+  currUserName!: string | null;
 
   ngOnInit(): void {
     this.initList();
-    this.currUserName=localStorage.getItem('userName');
+    this.currUserName = localStorage.getItem('userName');
   }
-  initList()
-  {
+  initList() {
     this.postService.getAllPosts().subscribe(
       (result) => {
         this.posts = result;
@@ -33,27 +32,15 @@ export class PostsFeedComponent implements OnInit {
     );
   }
 
-  deletePost()
-  {
+  deletePost() {}
 
-  }
-
-
-  editPost(post:Post)
-  {
- 
-    var dialogRef=this.dialog.open(EditPostComponent,
-      {
-        width:'150px',
-        data:{decription:post.Description}
-      });
-    dialogRef.afterClosed().subscribe((res)=>
-    {
+  editPost(post: Post) {
+    var dialogRef = this.dialog.open(EditPostComponent, {
+      width: '150px',
+      data: { decription: post.Description },
+    });
+    dialogRef.afterClosed().subscribe((res) => {
       this.postService.editPost(res);
-    })
-    
-    
-
+    });
   }
-  
 }

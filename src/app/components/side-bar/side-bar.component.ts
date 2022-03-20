@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
+import { NewPostComponent } from '../new-post/new-post.component';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserRegistrationComponent } from '../user-registration/user-registration.component';
 
@@ -13,6 +14,8 @@ export class SideBarComponent implements OnInit {
   userLogged: boolean;
   showLoginPopUpVab: boolean;
   userLoggedIn: boolean;
+  userName: any;
+  userPicture: any;
   constructor(public dialog: MatDialog, private router: Router) {
     this.userLogged = false;
     this.showLoginPopUpVab = false;
@@ -25,7 +28,12 @@ export class SideBarComponent implements OnInit {
   checkIfUserIsLogged() {
     if (localStorage.getItem('token')) {
       this.userLoggedIn = true;
-    } else this.userLoggedIn = false;
+      this.userName = localStorage.getItem('name');
+      this.userPicture = localStorage.getItem('pic');
+    } else {
+      this.userLoggedIn = false;
+      this.userPicture = '';
+    }
   }
 
   showLoginPopUp() {
@@ -38,6 +46,18 @@ export class SideBarComponent implements OnInit {
 
   showRegisterPopUp() {
     const dialogRef = this.dialog.open(UserRegistrationComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+      this.checkIfUserIsLogged();
+    });
+  }
+
+  showNewPost() {
+    const dialogRef = this.dialog.open(NewPostComponent, {
+      height: '50%',
+      width: '50%',
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

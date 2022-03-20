@@ -31,7 +31,7 @@ export class UserLoginComponent implements OnInit {
     this.isLoading(true);
     this.userService.login(this.userInfo).subscribe(
       (result) => {
-        this.signInUser(result.token);
+        this.signInUser(result);
         this.isLoading(false);
         this.showPopupMessage('Login Succefully');
       },
@@ -46,13 +46,15 @@ export class UserLoginComponent implements OnInit {
     this._snackBar.open(result, 'Dismiss', {
       duration: 3000,
       panelClass: ['blue-snackbar'],
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
     });
   }
 
-  signInUser(token: any) {
-    localStorage.setItem('token', token);
+  signInUser(result: any) {
+    localStorage.setItem('token', result.token);
+    localStorage.setItem('id', result.id);
+    localStorage.setItem('name', result.userName),
+      localStorage.setItem('pic', result.profilePic);
     this.router.navigate(['/feed']);
     this.dialogRef.closeAll();
   }
