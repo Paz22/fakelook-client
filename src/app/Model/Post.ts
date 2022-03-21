@@ -4,11 +4,11 @@ export default interface Post {
   imageSorce: string;
   x_Position: number;
   y_Position: number;
-  z_Position: number|null;
+  z_Position: number | null;
   Date: Date;
-  UserId: number;
+  userId: number;
   IsEdited: boolean;
   PermissionLevel: number;
-  tags:any[];
-  tagged:any[];
+  tags: any[];
+  tagged: any[];
 }

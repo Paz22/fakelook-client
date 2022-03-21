@@ -60,6 +60,17 @@ input[type="file"] {
   flex-direction: column;
 }
 .img-container {
+  max-width: 8rem;
+  min-width: 8rem;
+  max-height: 8rem;
+  min-height: 8rem;
+  img {
+    max-width: 8rem;
+    min-width: 8rem;
+    max-height: 8rem;
+    min-height: 8rem;
+    border-radius: 50%;
+  }
   label {
     display: flex;
     justify-content: center;

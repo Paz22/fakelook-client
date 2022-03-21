@@ -16,9 +16,9 @@ export class UserRegistrationComponent implements OnInit {
   errorMessage: string;
   loading: boolean;
   file: any;
-  @ViewChild('imgPreview') formImagePreview!: any;
   @ViewChild('input[type=file]') formImageInput!: any;
-
+  imgSrc = '../../../assets/Images/user-login-avatar.png';
+  imgFile?: File;
   constructor(
     private userService: UserService,
     private router: Router,
@@ -38,7 +38,7 @@ export class UserRegistrationComponent implements OnInit {
     if (validate.answer) {
       this.userService.addUser(this.user).subscribe(
         (result) => {
-          this.signInUser(result.token);
+          this.signInUser(result);
 
           this.isLoading(false);
         },
@@ -55,11 +55,14 @@ export class UserRegistrationComponent implements OnInit {
   isLoading(arg0: boolean) {
     this.loading = arg0;
   }
-  signInUser(token: any) {
+  signInUser(result: any) {
     this.showPopupMessage('Register Succefully');
-
-    localStorage.setItem('token', token);
-    this.router.navigate(['/main']);
+    console.log(result);
+    localStorage.setItem('token', result.token);
+    localStorage.setItem('id', result.id);
+    localStorage.setItem('name', result.userName),
+      localStorage.setItem('pic', result.profilePic);
+    this.router.navigate(['/feed']);
     this.dialogRef.closeAll();
   }
 
@@ -70,27 +73,19 @@ export class UserRegistrationComponent implements OnInit {
     this._snackBar.open(result, 'Dismiss', {
       duration: 3000,
       panelClass: ['blue-snackbar'],
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
+      verticalPosition: 'top',
     });
   }
 
-  changeFile(): void {
-    const preview = this.formImagePreview;
-    const file = this.formImageInput.files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener(
-      'load',
-      function () {
-        // convert image file to base64 string
-        preview.src = reader.result;
-      },
-      false
-    );
-
-    if (file) {
-      reader.readAsDataURL(file);
+  changeImage(event: any): void {
+    this.imgFile = event.target.files[0];
+    if (this.imgFile) {
+      var reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imgSrc = e.target.result;
+        this.user.ProfilePic = this.imgSrc;
+      };
+      reader.readAsDataURL(this.imgFile);
     }
   }
 }

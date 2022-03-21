@@ -7,6 +7,9 @@
   .container {
     width: 100%;
     text-align: center;
+    img {
+      max-width: 30%;
+    }
     i {
       font-size: 8vmin;
       color: #7a8aa0;

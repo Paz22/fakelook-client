@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,7 +29,10 @@ import { HomeComponent } from './components/home/home.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-
+import { DatePipe } from '@angular/common';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -70,8 +73,12 @@ const routes: Routes = [
     MatSnackBarModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatChipsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

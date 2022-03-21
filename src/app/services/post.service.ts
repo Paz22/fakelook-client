@@ -25,14 +25,13 @@ export class PostService {
   //    Authorization:'Bearer'+this.getToken(),});
   //    return this.http.delete<Post>(`${environment.postsUrl}/api/PostsAPI`,{headers},post.id);
   //}
-  
 
   newPost(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${environment.postsUrl}/api/PostsAPI`, post);
+    return this.http.post<Post>(`${environment.postsUrl}/AddPost`, post);
   }
 
   editPost(post: Post): Observable<Post> {
-    return this.http.put<Post>(`${environment.postsUrl}/api/PostsAPI`, post);
+    return this.http.put<Post>(`${environment.postsUrl}/AddPost`, post);
   }
   private getToken(): string | null {
     return localStorage.getItem('token');
@@ -40,4 +39,14 @@ export class PostService {
   private setToken(token: string): void {
     localStorage.setItem('token', token);
   }
+
+  addLike(postId: number) {
+    var userID = localStorage.getItem('id');
+    return this.http.post<any>(`${environment.likesURL}`, {
+      postId: postId,
+      userID: userID,
+    });
+  }
+
+  getPostById(postId: number) {}
 }

@@ -19,7 +19,7 @@
   }
   .logo-at-home {
     transform: translateX(100%);
-    width: 500px;
+    width: 350px;
 
     animation-name: logoTransformerAtHome;
   }
@@ -59,7 +59,7 @@
 @keyframes logoTransformer {
   0% {
     transform: translateX(100%);
-    width: 500px;
+    width: 350px;
   }
   50% {
     transform: translateX(80%);
@@ -85,7 +85,7 @@
     z-index: 1;
   }
   100% {
-    width: 500px;
+    width: 350px;
     transform: translateX(100%);
   }
 }

@@ -9,13 +9,9 @@
         accept="image/png, image/jpeg"
         id="img"
         #imgInput
-        (change)="changeFile()"
+        (change)="changeImage($event)"
       />
-      <img
-        #imgPreview
-        src="../../../assets/Images/user-login-avatar.png"
-        alt=""
-      />
+      <img #imgPreview [src]="imgSrc" alt="" />
     </label>
   </div>
   <div class="form-container" *ngIf="!loading">
@@ -50,14 +46,6 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
-    <!-- <input
-      type="file"
-      accept="image/png, image/jpeg"
-      id="img"
-      #img
-      (change)="changeFile($event)"
-    /> -->
     <mat-form-field appearance="legacy">
       <mat-label>Address</mat-label>
       <input matInput [(ngModel)]="user.Address" />
