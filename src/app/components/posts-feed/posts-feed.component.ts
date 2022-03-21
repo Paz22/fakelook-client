@@ -19,6 +19,7 @@ export class PostsFeedComponent implements OnInit {
   posts!: any[];
   currPost: any;
   currUserName!: string | null;
+  isPostLiked!: boolean[];
 
   ngOnInit(): void {
     this.initList();
@@ -35,7 +36,8 @@ export class PostsFeedComponent implements OnInit {
       (result) => {
         this.posts = result;
         console.log(this.posts);
-        this.posts.forEach((element) => {});
+        this.posts.forEach((post) => {});
+        this.initLikedPosts();
       },
       (error) => {
         console.log(error);
@@ -44,6 +46,19 @@ export class PostsFeedComponent implements OnInit {
   }
 
   deletePost() {}
+
+  initLikedPosts() {
+    if (!this.isPostLiked) this.isPostLiked = [];
+    var currId = localStorage.getItem('id');
+    for (var i = 0; i < this.posts.length; i++) {
+      for (var j = 0; j < this.posts[i].likes.length; j++) {
+        if (this.posts[i].likes[j].UserId == currId) {
+          this.isPostLiked[i] = true;
+        }
+      }
+    }
+    console.log(this.isPostLiked);
+  }
 
   editPost(post: Post) {
     var dialogRef = this.dialog.open(EditPostComponent, {
@@ -55,5 +70,18 @@ export class PostsFeedComponent implements OnInit {
     });
   }
 
-  postChosen(post: Post) {}
+  addLike(postId: number) {
+    this.postService.addLike(postId).subscribe((res) => {
+      console.log('liked added');
+      for (var j = 0; j < this.posts.length; j++) {
+        if ((this.posts[j].id = postId)) {
+          this.posts[j] = res.isActive;
+        }
+      }
+    });
+  }
+
+  postChosen(post: Post) {
+    console.log(post);
+  }
 }

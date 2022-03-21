@@ -17,7 +17,7 @@
     <div
       class="blog_post"
       (click)="postChosen(post)"
-      *ngFor="let post of posts"
+      *ngFor="let post of posts; let i = index"
     >
       <div class="img_pod">
         <img
@@ -39,7 +39,7 @@
             color="warn"
             aria-label="Example icon button with a heart icon"
           >
-            <i class="bx bxs-heart"></i>
+            <i class="bx bxs-heart" (click)="addLike(post.id)"></i>
             {{ post.likes.length }}
           </button>
         </div>

@@ -17,7 +17,7 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class MapComponent implements OnInit {
   Cesium = Cesium;
-  entities$!: Observable<any>;
+  entities$!: Observable<AcNotification>;
   selectedPost!: Post;
   showDialog = false;
   constructor(
@@ -44,15 +44,16 @@ export class MapComponent implements OnInit {
     this.entities$ = this.postService.getAllPosts().pipe(
       map((posts) => {
         return posts.map((post: Post) => ({
-          id: post.id,
+          id: post.id.toString(),
           actionType: ActionType.ADD_UPDATE,
           entity: {
             ...post,
-            location: {
-              x: post.x_Position,
-              y: post.y_Position,
-              z: post.z_Position,
-            },
+            location: Cesium.Cartesian3.fromDegrees(
+              post.x_Position,
+              post.y_Position,
+              post.z_Position
+            ),
+            isShow: true,
           },
         }));
       }),

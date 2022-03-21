@@ -184,9 +184,6 @@ export class NewPostComponent implements OnInit {
         this.tagsForServer.push({ content: words[words.length - 1] });
         words.pop();
       }
-
-      // Clear the input value
-
       this.tagInput.nativeElement.value = words.join(' ');
       this.post.Description = this.tagInput.nativeElement.value;
       console.log(this.tags);
