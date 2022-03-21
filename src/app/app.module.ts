@@ -27,6 +27,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { PostsFeedComponent } from './components/posts-feed/posts-feed.component';
 import { HomeComponent } from './components/home/home.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { FilterComponent } from './components/filter/filter.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
@@ -47,6 +49,8 @@ const routes: Routes = [
     PostsFeedComponent,
     HomeComponent,
     EditPostComponent,
+    FilterComponent,
+    UserSettingsComponent,
     ResetPasswordComponent,
   ],
   imports: [

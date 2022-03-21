@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Filter from '../Model/Filter';
 import Post from '../Model/Post';
 
 @Injectable({
@@ -25,6 +26,25 @@ export class PostService {
   //    Authorization:'Bearer'+this.getToken(),});
   //    return this.http.delete<Post>(`${environment.postsUrl}/api/PostsAPI`,{headers},post.id);
   //}
+
+  addLike(postId:number)
+  {
+    var userID=localStorage.getItem('id');
+    return this.http.post<any>(`${environment.likesURL}`,{postId:postId,userID:userID});
+  }
+
+ 
+
+  filter(filter:Filter)
+  {
+    return this.http.post<any>(`${environment.postsUrl}/api/PostsAPI/Filter`,filter).subscribe((res)=>
+    {
+      res.forEach((element: any) =>
+      {
+        console.log(element);
+      });
+    });
+  }
   
 
   newPost(post: Post): Observable<Post> {

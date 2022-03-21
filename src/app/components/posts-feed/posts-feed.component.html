@@ -14,7 +14,11 @@
         <div class="post-desc">sd</div>
       </div>
     </div> -->
-    <div class="blog_post" *ngFor="let post of posts">
+
+    <div class="button-container account" (click)="showFilterPopUp()" >
+      <div class="icon-container"><i class="bx bx-filter-alt"></i></div>
+    </div>
+    <div class="blog_post" *ngFor="let post of posts;let index=index">
       <div class="img_pod">
         <img
           src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"
@@ -25,20 +29,30 @@
         <img src="{{ post.imageSorce }}" alt="" />
       </div>
       <h3>{{ post.date | date: "mediumDate" }}</h3>
+      <div *ngIf="post.userName==currUserName" >
+        <button >
+            delete
+        </button>
+        <button >
+          edit
+        </button>
+      </div>
+     
       <p>
         {{ post.description }}
       </p>
       <div class="infos-container">
         <div class="info-container">
-          <button
+          <button (click)="addLike(post.id)"
             mat-icon-button
             color="warn"
             aria-label="Example icon button with a heart icon"
           >
             <i class="bx bxs-heart"></i>
             {{ post.likes.length }}
-          </button>
+          </button>         
         </div>
+        
         <div class="info-container">
           <button
             mat-icon-button
@@ -47,9 +61,10 @@
           >
             <i class="bx bx-chat"></i> {{ post.likes.length }}
           </button>
+        
         </div>
       </div>
     </div>
   </div>
-  <div class="friends-list-container">asdjkn</div>
+  <div class="friends-list-container">friends list</div>
 </div>

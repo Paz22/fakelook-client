@@ -29,20 +29,21 @@ export class UserLoginComponent implements OnInit {
     this.isLoading(true);
     this.userService.login(this.userInfo).subscribe(
       (result) => {
-        this.signInUser(result.token);
-        this.isLoading(false);
+        this.signInUser(result.token,result.userName,result.userId);
       },
       (error) => {
         console.log(error);
         this.errorMessage = error.error.detail;
-        this.isLoading(false);
       }
     );
+    this.isLoading(false);
   }
 
-  signInUser(token: any) {
+  signInUser(token: any,userName:string,userId:string) {
     localStorage.setItem('token', token);
-    this.router.navigate(['/feed']);
+    localStorage.setItem('userName', userName);
+    localStorage.setItem('id', userId);
+    this.router.navigate(['/main']);
     this.dialogRef.closeAll();
   }
   isLoading(arg0: boolean) {
@@ -52,5 +53,7 @@ export class UserLoginComponent implements OnInit {
   resetMassage() {
     this.errorMessage = '';
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
+  
 }

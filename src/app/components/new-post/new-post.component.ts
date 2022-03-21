@@ -56,7 +56,6 @@ export class NewPostComponent implements OnInit {
       })  
   }
 
-  
   addNewpost()
   {
     this.getCurrLocation();
