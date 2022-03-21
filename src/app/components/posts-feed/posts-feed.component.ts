@@ -15,11 +15,15 @@ export class PostsFeedComponent implements OnInit {
     private postService: PostService,
     public dialog: MatDialog,
     private routerLinkService: RouterLinkService
-  ) {}
+  ) {
+    if (!this.isPostLiked) this.isPostLiked = [];
+    this.postLikeCounter = [];
+  }
   posts!: any[];
   currPost: any;
   currUserName!: string | null;
   isPostLiked!: boolean[];
+  postLikeCounter: number[];
 
   ngOnInit(): void {
     this.initList();
@@ -38,6 +42,7 @@ export class PostsFeedComponent implements OnInit {
         console.log(this.posts);
         this.posts.forEach((post) => {});
         this.initLikedPosts();
+        this.initLikedPostNumber();
       },
       (error) => {
         console.log(error);
@@ -48,16 +53,32 @@ export class PostsFeedComponent implements OnInit {
   deletePost() {}
 
   initLikedPosts() {
-    if (!this.isPostLiked) this.isPostLiked = [];
     var currId = localStorage.getItem('id');
     for (var i = 0; i < this.posts.length; i++) {
       for (var j = 0; j < this.posts[i].likes.length; j++) {
-        if (this.posts[i].likes[j].UserId == currId) {
+        if (
+          this.posts[i].likes[j].user.id == currId &&
+          this.posts[i].likes[j].isActive
+        ) {
           this.isPostLiked[i] = true;
+        } else {
+          this.isPostLiked[i] = false;
         }
       }
     }
     console.log(this.isPostLiked);
+  }
+
+  initLikedPostNumber() {
+    for (var i = 0; i < this.posts.length; i++) {
+      var postsLiked = 0;
+      for (var j = 0; j < this.posts[i].likes.length; j++) {
+        if (this.posts[i].likes[j].isActive) {
+          postsLiked++;
+        }
+      }
+      this.postLikeCounter[i] = postsLiked;
+    }
   }
 
   editPost(post: Post) {
@@ -73,11 +94,6 @@ export class PostsFeedComponent implements OnInit {
   addLike(postId: number) {
     this.postService.addLike(postId).subscribe((res) => {
       console.log('liked added');
-      for (var j = 0; j < this.posts.length; j++) {
-        if ((this.posts[j].id = postId)) {
-          this.posts[j] = res.isActive;
-        }
-      }
     });
   }
 

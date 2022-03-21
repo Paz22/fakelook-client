@@ -38,9 +38,12 @@
             mat-icon-button
             color="warn"
             aria-label="Example icon button with a heart icon"
+            (click)="addLike(post.id)"
           >
-            <i class="bx bxs-heart" (click)="addLike(post.id)"></i>
-            {{ post.likes.length }}
+            <i *ngIf="this.isPostLiked[i]" class="bx bxs-heart"></i>
+            <i *ngIf="!this.isPostLiked[i]" class="bx bx-heart"></i>
+
+            {{ postLikeCounter[i] }}
           </button>
         </div>
         <div class="info-container">
