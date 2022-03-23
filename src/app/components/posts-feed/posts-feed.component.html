@@ -1,5 +1,8 @@
 <div class="main-container">
   <div class="posts-container">
+    <div class="button-container account" (click)="showFilterPopUp()">
+      <div class="icon-container"><i class="bx bx-filter-alt"></i></div>
+    </div>
     <div class="page-title">My Friends Post's</div>
     <div class="blog_post" *ngFor="let post of posts; let i = index">
       <div class="img_pod">

@@ -6,16 +6,16 @@
 import User from 'src/app/Model/User';
 
 const validateRgisterForm = (user: User) => {
-  if (!user.FirstName || !user.LastName || !user.Address || !user.BirthDate)
+  if (!user.firstName || !user.lastName || !user.address || !user.birthDate)
     return { answer: false, message: 'Fill all fields' };
 
-  if (user.FirstName.length < 3)
+  if (user.firstName.length < 3)
     return { answer: false, message: 'First Name is too short' };
-  if (user.LastName.length < 3)
+  if (user.lastName.length < 3)
     return { answer: false, message: 'Last Name is too short' };
-  if (user.Address.length < 3)
+  if (user.address.length < 3)
     return { answer: false, message: 'Address is not valid' };
-  if (!user.BirthDate) return { answer: false, message: 'BirthData is a must' };
+  if (!user.birthDate) return { answer: false, message: 'BirthData is a must' };
   return { answer: true, message: 'valid' };
 };
 export { validateRgisterForm };

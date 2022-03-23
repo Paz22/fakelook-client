@@ -1,0 +1,159 @@
+<!-- <div class="main-container">
+    <div class="title-container">
+      <h1>User Settings</h1>
+    </div>
+    <div class="img-container">
+      <label class="custom-file-upload">
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          id="img"
+          #imgInput
+          (change)="changeImage($event)"
+        />
+        <img #imgPreview [src]="imgSrc" alt="" />
+      </label>
+    </div>
+    <div class="button-container-first" >
+        <button  mat-raised-button color="primary" (click)="resetPassword()">
+          Reset Password
+          <i class="mdi mdi-1emp mdi-lock-outline" matSuffix></i>
+        </button>
+      </div>
+    <div class="form-container" >
+        <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Password</mat-label>
+        </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>User Name</mat-label>
+        <input type="text" matInput [(ngModel)]="UserName" />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>First Name</mat-label>
+        <input type="text" matInput [(ngModel)]="FirstName" />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Last Name</mat-label>
+        <input type="text" matInput [(ngModel)]="LastName" />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Email</mat-label>
+        <input type="email" matInput [(ngModel)]="Email" />
+        <i class="mdi mdi-1emp mdi-email-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Address</mat-label>
+        <input matInput [(ngModel)]="Address" />
+        <i class="mdi mdi-1emp mdi-map-marker-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field appearance="legacy">
+        <mat-label>Work Place</mat-label>
+        <input matInput [(ngModel)]="Workplace" />
+        <i class="mdi mdi-1emp mdi-briefcase-outline form-icon" matSuffix></i>
+      </mat-form-field>
+    </div>
+
+  <div class="button-container" >
+    <button  mat-raised-button color="primary">
+      Edit User
+      <i class="mdi mdi-1emp mdi-content-save" matSuffix></i>
+    </button>
+  </div>
+  
+   -->
+
+<div class="main-container">
+  <div class="title-container"><h1>User Settings</h1></div>
+  <div class="form-container">
+    <form #form="ngForm">
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>User Name</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.userName"
+          id="userName"
+          #userName="ngModel"
+          name="userName"
+        />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>First Name</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.firstName"
+          id="FirstName"
+          #FirstName="ngModel"
+          name="FirstName"
+        />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Last Name</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.lastName"
+          id="LastName"
+          #LastName="ngModel"
+          name="LastName"
+        />
+        <i class="mdi mdi-1emp mdi-account-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Email</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.email"
+          id="Email"
+          #Email="ngModel"
+          name="Email"
+        />
+        <i class="mdi mdi-1emp mdi-email-open-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Address</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.address"
+          id="Address"
+          #Address="ngModel"
+          name="Address"
+        />
+        <i class="mdi mdi-1emp mdi-map-marker-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="legacy">
+        <mat-label>Workplace</mat-label>
+        <input
+          type="text"
+          matInput
+          [(ngModel)]="user.workPlace"
+          id="Workplace"
+          #Workplace="ngModel"
+          name="Workplace"
+        />
+        <i class="mdi mdi-1emp mdi-briefcase-outline form-icon" matSuffix></i>
+      </mat-form-field>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="resetPassword()">
+          Reset Password
+        </button>
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="updateUserSetting()">
+          Edit User
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="error-container">
+  {{ msg }}
+</div>

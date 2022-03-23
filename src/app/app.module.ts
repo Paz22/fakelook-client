@@ -38,6 +38,8 @@ import { PostComponent } from './components/post/post.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { FilterComponent } from './components/filter/filter.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -59,6 +61,8 @@ const routes: Routes = [
     EditPostComponent,
     ResetPasswordComponent,
     PostComponent,
+    FilterComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserModule,

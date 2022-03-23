@@ -83,7 +83,7 @@ export class UserRegistrationComponent implements OnInit {
       var reader = new FileReader();
       reader.onload = (e: any) => {
         this.imgSrc = e.target.result;
-        this.user.ProfilePic = this.imgSrc;
+        this.user.profilePic = this.imgSrc;
       };
       reader.readAsDataURL(this.imgFile);
     }

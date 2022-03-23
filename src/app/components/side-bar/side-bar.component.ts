@@ -4,6 +4,7 @@ import { Route, Router } from '@angular/router';
 import { NewPostComponent } from '../new-post/new-post.component';
 import { UserLoginComponent } from '../user-login/user-login.component';
 import { UserRegistrationComponent } from '../user-registration/user-registration.component';
+import { UserSettingsComponent } from '../user-settings/user-settings.component';
 
 @Component({
   selector: 'app-side-bar',
@@ -75,5 +76,12 @@ export class SideBarComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/']);
     this.checkIfUserIsLogged();
+  }
+
+  openUserSettings() {
+    const dialogRef = this.dialog.open(UserSettingsComponent);
+    dialogRef.afterClosed().subscribe((res) => {
+      console.log(res);
+    });
   }
 }

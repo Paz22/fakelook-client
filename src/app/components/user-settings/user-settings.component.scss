@@ -1,0 +1,73 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-weight: bold;
+  }
+  .form-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 10px;
+    column-gap: 10px;
+    word-wrap: break-word;
+  }
+}
+
+.form-icon {
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 4px;
+  color: #707070;
+  .button {
+    i {
+      color: whitesmoke;
+    }
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    color: blue;
+  }
+}
+::ng-deep .mat-raised-button:hover {
+  color: #3f51b5;
+  background-color: whitesmoke;
+}
+
+input[type="file"] {
+  display: none;
+}
+.custom-file-upload {
+  img {
+    width: 30%;
+  }
+  display: inline-block;
+  cursor: pointer;
+}
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+.img-container {
+  max-width: 8rem;
+  min-width: 8rem;
+  max-height: 8rem;
+  min-height: 8rem;
+  img {
+    max-width: 8rem;
+    min-width: 8rem;
+    max-height: 8rem;
+    min-height: 8rem;
+    border-radius: 50%;
+  }
+  label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
