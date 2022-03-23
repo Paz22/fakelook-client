@@ -85,6 +85,7 @@ input[type="file"] {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+
     width: 50%;
     height: 100%;
     mat-form-field {
@@ -92,4 +93,27 @@ input[type="file"] {
       width: 100%;
     }
   }
+}
+
+.friends-container {
+  margin: 10px;
+  height: 100px;
+  img {
+    width: 10px;
+    height: 10px;
+  }
+  mat-selection-list {
+    height: 70%;
+    width: 200px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}
+.tag-chip {
+  background-color: #fb4585;
+  color: white;
+}
+.user-tag-chip {
+  color: white;
+  background-color: #3c54b4;
 }

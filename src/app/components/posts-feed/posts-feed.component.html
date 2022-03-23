@@ -1,24 +1,7 @@
 <div class="main-container">
   <div class="posts-container">
     <div class="page-title">My Friends Post's</div>
-    <!-- <div class="post">
-      <div class="post-info">
-        <div class="post-writer-image">
-          <img src="../../../assets/Images/user-login-avatar.png" alt="" />
-        </div>
-      </div>
-      <div class="post-body">
-        <div class="post-image">
-          <img src="../../../assets/Images/user-login-avatar.png" alt="" />
-        </div>
-        <div class="post-desc">sd</div>
-      </div>
-    </div> -->
-    <div
-      class="blog_post"
-      (click)="postChosen(post)"
-      *ngFor="let post of posts; let i = index"
-    >
+    <div class="blog_post" *ngFor="let post of posts; let i = index">
       <div class="img_pod">
         <img
           src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"
@@ -28,6 +11,17 @@
       <div class="img-post" *ngIf="post.imageSorce">
         <img src="{{ post.imageSorce }}" alt="" />
       </div>
+      <mat-chip-list aria-label="Fish selection">
+        <div class="tags-post" *ngFor="let tag of post.tags">
+          <mat-chip color="accent" selected>{{ tag.content }}</mat-chip>
+        </div>
+        <div class="tags-post" *ngFor="let userTag of post.userTaggedPost">
+          <mat-chip color="primary" selected>{{
+            userTag.user.userName
+          }}</mat-chip>
+        </div>
+      </mat-chip-list>
+
       <h3>{{ post.date | date: "mediumDate" }}</h3>
       <p>
         {{ post.description }}
@@ -38,11 +32,15 @@
             mat-icon-button
             color="warn"
             aria-label="Example icon button with a heart icon"
-            (click)="addLike(post.id)"
+            (click)="addLike(post.id, i)"
           >
-            <i *ngIf="this.isPostLiked[i]" class="bx bxs-heart"></i>
-            <i *ngIf="!this.isPostLiked[i]" class="bx bx-heart"></i>
-
+            <i
+              [ngClass]="{
+                bx: true,
+                'bx-heart': !this.isPostLiked[i],
+                'bxs-heart': this.isPostLiked[i]
+              }"
+            ></i>
             {{ postLikeCounter[i] }}
           </button>
         </div>
@@ -51,8 +49,10 @@
             mat-icon-button
             color="primary"
             aria-label="Example icon button with a home icon"
+            (click)="postChosen(post)"
           >
-            <i class="bx bx-chat"></i> {{ post.likes.length }}
+            <i class="bx bx-chat"></i>
+            {{ post.comments.length }}
           </button>
         </div>
       </div>
