@@ -6,6 +6,7 @@ import Post from 'src/app/Model/Post';
 import { PostService } from 'src/app/services/post.service';
 import { RouterLinkService } from 'src/app/services/router-link.service';
 import { EditPostComponent } from '../edit-post/edit-post.component';
+import { FilterComponent } from '../filter/filter.component';
 import { PostComponent } from '../post/post.component';
 
 @Component({
@@ -39,6 +40,27 @@ export class PostsFeedComponent implements OnInit {
       if (event) this.initList();
     });
   }
+
+  showFilterPopUp() {
+    const dialogRef = this.dialog.open(FilterComponent);
+    dialogRef.afterClosed().subscribe((filter) => {
+      if (filter) {
+        this.postService.filter(filter).subscribe(
+          (result) => {
+            this.posts = result;
+            console.log(this.posts);
+            this.posts.forEach((post) => {});
+            this.initLikedPosts();
+            this.initLikedPostNumber();
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
+    });
+  }
+
   initList() {
     this.postService.getAllPosts().subscribe(
       (result) => {

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Filter from '../Model/Filter';
 import Post from '../Model/Post';
 
 @Injectable({
@@ -10,6 +11,9 @@ import Post from '../Model/Post';
 export class PostService {
   constructor(private http: HttpClient) {}
 
+  postFilter: { filter?: Filter; isActive: boolean } = { isActive: false };
+  postsSubject = new BehaviorSubject<Post[]>([]);
+
   getAllPosts(): Observable<Post[]> {
     console.log('jere');
     const currentUrl = `${environment.postsUrl}/GetAllPosts`;
@@ -17,6 +21,34 @@ export class PostService {
       Authorization: 'Bearer ' + this.getToken(),
     });
     return this.http.get<Post[]>(currentUrl, { headers });
+  }
+  getAllPostMap(): Observable<Post[]> {
+    this.getAllPosts().subscribe((res) => this.postsSubject.next(res));
+    return this.postsSubject.asObservable();
+  }
+  filter(filter: Filter) {
+    return this.http.post<Post[]>(`${environment.postsUrl}/Filter`, filter);
+
+    // return this.http.post<any>(`${environment.postsUrl}/Filter`,filter).subscribe((res)=>
+    // {
+    //   console.log(res);
+
+    // },(error)=>{
+    //   console.log(error)
+    // });
+  }
+  filterMap(filter: Filter) {
+    this.http
+      .post<Post[]>(`${environment.postsUrl}/Filter`, filter)
+      .subscribe((res) => this.postsSubject.next(res));
+
+    // return this.http.post<any>(`${environment.postsUrl}/Filter`,filter).subscribe((res)=>
+    // {
+    //   console.log(res);
+
+    // },(error)=>{
+    //   console.log(error)
+    // });
   }
 
   //deletePost(post:Post):Observable<Post>

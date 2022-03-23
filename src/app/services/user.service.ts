@@ -28,4 +28,14 @@ export class UserService {
   getAll(): Observable<any> {
     return this.http.get<any>(`${environment.usersURL}/GetAllUsers`);
   }
+
+  getUserById() {
+    return this.http.get<User>(
+      `${environment.usersURL}/GetById?id=${localStorage.getItem('id') || ''}`
+    );
+  }
+
+  updateUser(user: User) {
+    return this.http.put<User>(`${environment.usersURL}/Put`, user);
+  }
 }
