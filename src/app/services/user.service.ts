@@ -24,4 +24,8 @@ export class UserService {
   login(user: User): Observable<any> {
     return this.http.post<any>(`${environment.usersURL}/Login`, user);
   }
+
+  getAll(): Observable<any> {
+    return this.http.get<any>(`${environment.usersURL}/GetAllUsers`);
+  }
 }

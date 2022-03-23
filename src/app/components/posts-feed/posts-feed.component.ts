@@ -1,9 +1,12 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import Post from 'src/app/Model/Post';
 import { PostService } from 'src/app/services/post.service';
 import { RouterLinkService } from 'src/app/services/router-link.service';
 import { EditPostComponent } from '../edit-post/edit-post.component';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-posts-feed',
@@ -14,7 +17,8 @@ export class PostsFeedComponent implements OnInit {
   constructor(
     private postService: PostService,
     public dialog: MatDialog,
-    private routerLinkService: RouterLinkService
+    private routerLinkService: RouterLinkService,
+    private _bottomSheet: MatBottomSheet
   ) {
     if (!this.isPostLiked) this.isPostLiked = [];
     this.postLikeCounter = [];
@@ -84,20 +88,30 @@ export class PostsFeedComponent implements OnInit {
   editPost(post: Post) {
     var dialogRef = this.dialog.open(EditPostComponent, {
       width: '150px',
-      data: { decription: post.Description },
+      data: { decription: post.description },
     });
     dialogRef.afterClosed().subscribe((res) => {
       this.postService.editPost(res);
     });
   }
 
-  addLike(postId: number) {
+  addLike(postId: number, index: number) {
+    if (!this.isPostLiked[index]) this.postLikeCounter[index]++;
+    else this.postLikeCounter[index]--;
+    this.isPostLiked[index] = !this.isPostLiked[index];
     this.postService.addLike(postId).subscribe((res) => {
       console.log('liked added');
     });
   }
 
   postChosen(post: Post) {
-    console.log(post);
+    console.log(post.id);
+
+    const bottomSheetRef = this._bottomSheet.open(PostComponent, {
+      data: { id: post.id },
+    });
+    bottomSheetRef.afterDismissed().subscribe(() => {
+      console.log('Bottom sheet has been dismissed.');
+    });
   }
 }

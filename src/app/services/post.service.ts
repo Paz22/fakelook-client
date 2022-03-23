@@ -31,7 +31,7 @@ export class PostService {
   }
 
   editPost(post: Post): Observable<Post> {
-    return this.http.put<Post>(`${environment.postsUrl}/AddPost`, post);
+    return this.http.put<Post>(`${environment.postsUrl}/EditPost`, post);
   }
   private getToken(): string | null {
     return localStorage.getItem('token');
@@ -48,5 +48,22 @@ export class PostService {
     });
   }
 
-  getPostById(postId: number) {}
+  addComment(postId: number, value: string) {
+    var userID = localStorage.getItem('id');
+
+    return this.http.post<any>(`${environment.commentsURL}`, {
+      userId: userID,
+      content: value,
+      postId: postId,
+    });
+  }
+
+  getPostById(postId: number) {
+    return this.http.get<Post>(
+      `${environment.postsUrl}/GetPostById?id=${postId}`
+    );
+    // return this.http.get<Post>(
+    //   'https://localhost:44349/api/PostsAPI/GetPostById?id=' + postId
+    // );
+  }
 }

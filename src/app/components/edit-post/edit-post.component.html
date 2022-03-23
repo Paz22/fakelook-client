@@ -1,1 +1,73 @@
-<p>edit-post works!</p>
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="form-container" *ngIf="!loading">
+  <div class="img-container">
+    <div class="image-container">
+      <label class="custom-file-upload">
+        <input
+          type="file"
+          accept="image/png, image/jpeg"
+          id="img"
+          #imgInput
+          (change)="showFilePreview($event)"
+        />
+        <img #imgPreview [src]="imgSrc" alt="" />
+      </label>
+    </div>
+  </div>
+  <div class="inputs-container">
+    <h1>Edit Post</h1>
+    <div class="form-inputs">
+      <mat-form-field class="example-chip-list" appearance="legacy">
+        <mat-label>Description</mat-label>
+        <mat-chip-list #chipList aria-label="Tags selection">
+          <mat-chip
+            *ngFor="let tag of tags; let i = index"
+            (removed)="remove(tag)"
+          >
+            {{ tag }}
+            <button matChipRemove (click)="remove(tag)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+          <input
+            matInput
+            placeholder="Description"
+            id="Description"
+            [(ngModel)]="post.description"
+            (keyup)="inputChanged($event)"
+            #tagInput
+            [formControl]="tagCtrl"
+            [matAutocomplete]="auto"
+            [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+            (matChipInputTokenEnd)="add($event)"
+          />
+        </mat-chip-list>
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+            {{ tag }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <div class="friends-container" *ngIf="writingUserTag">
+        <mat-selection-list #userTag [multiple]="false">
+          <mat-list-option
+            *ngFor="let friend of userList"
+            (click)="userTagChosen(friend)"
+          >
+            <img src="{{ friend.profilePic }}" alt="" />
+            {{ friend.userName }}
+          </mat-list-option>
+        </mat-selection-list>
+      </div>
+      <button mat-raised-button color="primary" (click)="addNewpost()">
+        Add Post
+      </button>
+    </div>
+  </div>
+</div>

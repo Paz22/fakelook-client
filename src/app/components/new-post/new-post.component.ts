@@ -11,6 +11,10 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { map, Observable, startWith } from 'rxjs';
+import { UserService } from 'src/app/services/user.service';
+import User from 'src/app/Model/User';
+import { ThisReceiver } from '@angular/compiler';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-new-post',
@@ -32,7 +36,14 @@ export class NewPostComponent implements OnInit {
   filteredTags: Observable<string[]>;
   tags: string[] = [''];
   tagsForServer: any[] = [];
+  userTags: string[] = [];
+  userTagsForServer: any[] = [];
+  userList: any[] = [];
+  writingUserTag: boolean;
+  userTaggedPost: any[] = [];
+
   allTags: string[] = [];
+
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
   loading: boolean;
@@ -42,16 +53,25 @@ export class NewPostComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     private dialogRef: MatDialog,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private userService: UserService,
+    private _bottomSheet: MatBottomSheet
   ) {
     this.loading = false;
     this.writingTag = false;
+    this.writingUserTag = false;
     this.filteredTags = this.tagCtrl.valueChanges.pipe(
       startWith(null),
       map((fruit: string | null) =>
         fruit ? this._filter(fruit) : this.allTags.slice()
       )
     );
+    this.initFriendList();
+  }
+  initFriendList() {
+    this.userService.getAll().subscribe((result) => {
+      this.userList = result;
+    });
   }
 
   private _filter(value: string): string[] {
@@ -62,10 +82,25 @@ export class NewPostComponent implements OnInit {
     );
   }
 
+  removeUserTag(userTag: string) {
+    const index = this.userTags.indexOf(userTag);
+    const indexList = this.userTaggedPost.indexOf(userTag);
+    const indexForServer = this.userTagsForServer.indexOf(userTag);
+    if (index >= 0) {
+      this.userTags.splice(index, 1);
+      this.userTaggedPost.splice(indexList, 1);
+      this.userTagsForServer.splice(indexForServer, 1);
+    }
+  }
+
   inputChanged(event: any) {
     if (event.key == '#') {
       this.writingTag = true;
       console.log(this.writingTag);
+      this.separatorKeysCodes = [ENTER, COMMA, SPACE];
+    }
+    if (event.key == '@') {
+      this.writingUserTag = true;
       this.separatorKeysCodes = [ENTER, COMMA, SPACE];
     }
   }
@@ -77,7 +112,7 @@ export class NewPostComponent implements OnInit {
     tag.content = 'sdklm';
     this.tags = [];
     // this.tags.push(tag);
-    this.post.Description = '';
+    this.post.description = '';
   }
 
   parsePostDescription(postDescription: string) {
@@ -104,18 +139,18 @@ export class NewPostComponent implements OnInit {
       this.post.x_Position = this.currXPos;
       this.post.y_Position = this.currYPos;
       this.post.z_Position = 32.0852999;
-      console.log(this.post.Description);
+      console.log(this.post.description);
       console.log(this.post.y_Position);
       console.log(data.coords.altitude);
-      this.post.Description = this.tagInput.nativeElement.value;
+      this.post.description = this.tagInput.nativeElement.value;
 
-      if (this.post.Description.length > 1) {
-        this.parsePostDescription(this.post.Description);
+      if (this.post.description.length > 1) {
+        this.parsePostDescription(this.post.description);
         this.post.tags = this.tagsForServer;
         this.post.tagged = this.userTagged;
         var currDate = new Date();
         this.datePipe.transform(currDate, 'yyyy-mm-dd');
-        this.post.Date = currDate;
+        this.post.date = currDate;
         this.post.userId = parseInt(localStorage.getItem('id') || '0');
 
         this.post.IsEdited = false;
@@ -146,6 +181,7 @@ export class NewPostComponent implements OnInit {
   addNewpost() {
     console.log(this.inputValue + 'value');
     this.post.tags = this.tags;
+    this.post.userTaggedPost = this.userTaggedPost;
     this.getCurrLocation();
   }
 
@@ -174,30 +210,50 @@ export class NewPostComponent implements OnInit {
     if (this.writingTag) {
       console.log(event);
       let value = (event.value || '').trim();
-
-      // Add our fruit
       if (value) {
         var words = value.split(' ');
-
         console.log(typeof value);
         this.tags.push(words[words.length - 1]);
         this.tagsForServer.push({ content: words[words.length - 1] });
         words.pop();
       }
       this.tagInput.nativeElement.value = words.join(' ');
-      this.post.Description = this.tagInput.nativeElement.value;
+      this.post.description = this.tagInput.nativeElement.value;
       console.log(this.tags);
       this.tagCtrl.setValue(null);
       this.separatorKeysCodes = [];
     }
+    if (this.writingUserTag) {
+      let value = (event.value || '').trim();
+      if (value) {
+        var words = value.split(' ');
+        var userTag = words[words.length - 1];
+        userTag = userTag.substring(1);
+
+        console.log(userTag);
+      }
+    }
   }
 
-  remove(fruit: string): void {
-    const index = this.tags.indexOf(fruit);
-
+  remove(tag: string): void {
+    const index = this.tags.indexOf(tag);
+    const indexForServer = this.tagsForServer.indexOf(tag);
     if (index >= 0) {
       this.tags.splice(index, 1);
+      this.tagsForServer.splice(indexForServer, 1);
     }
+  }
+
+  userTagChosen(event: any) {
+    console.log('user Tag Chosen');
+    this.writingUserTag = false;
+    this.separatorKeysCodes = [];
+    var value = this.tagInput.nativeElement.value;
+    var res = value.split(' '); //split by space
+    res.pop(); //remove last element
+    this.tagInput.nativeElement.value = res.join(' '); //join back together
+    this.userTaggedPost.push({ userId: event.id });
+    this.userTags.push(event.userName);
   }
 
   selected(event: any): void {

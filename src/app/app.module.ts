@@ -33,6 +33,11 @@ import { DatePipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { PostComponent } from './components/post/post.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatListModule } from '@angular/material/list';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -53,6 +58,7 @@ const routes: Routes = [
     HomeComponent,
     EditPostComponent,
     ResetPasswordComponent,
+    PostComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,11 +78,16 @@ const routes: Routes = [
     MatIconModule,
     MatSnackBarModule,
     MatButtonModule,
+    MatExpansionModule,
     MatProgressSpinnerModule,
     MatChipsModule,
     MatSelectModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatListModule,
+    MatBottomSheetModule,
+    MatCardModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
