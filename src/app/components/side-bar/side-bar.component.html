@@ -1,15 +1,14 @@
 <div class="main-container">
   <div class="first-section-container">
     <div class="container title">
-      <img *ngIf="userLoggedIn" [src]="userPicture" />
-      <i *ngIf="!userLoggedIn" class="bx bxs-user-circle"></i>
+      <i class="bx bxs-user-circle"></i>
     </div>
     <div class="container status">
       <div class="offline" *ngIf="!userLoggedIn">
         <i class="bx bxs-circle"></i> OFFLINE
       </div>
       <div class="online" *ngIf="userLoggedIn">
-        <i class="bx bxs-circle"></i> {{ this.userName }}
+        <i class="bx bxs-circle"></i> ONLINE
       </div>
     </div>
   </div>
@@ -33,7 +32,7 @@
     <div
       class="button-container account"
       *ngIf="userLoggedIn"
-      (click)="showNewPost()"
+      (click)="showRegisterPopUp()"
     >
       <div class="icon-container"><i class="bx bx-message-add"></i></div>
       <div class="text-container">New Post</div>
@@ -57,7 +56,7 @@
     <div
       class="button-container account"
       *ngIf="userLoggedIn"
-      (click)="signOutUser()"
+      (click)="openUserSettings()"
     >
       <div class="icon-container"><i class="bx bx-cog"></i></div>
       <div class="text-container">Settings</div>

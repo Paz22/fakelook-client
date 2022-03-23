@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import Post from 'src/app/Model/Post';
+import User from 'src/app/Model/User';
 import { PostService } from 'src/app/services/post.service';
 import { RouterLinkService } from 'src/app/services/router-link.service';
+import { UserService } from 'src/app/services/user.service';
 import { EditPostComponent } from '../edit-post/edit-post.component';
+import { FilterComponent } from '../filter/filter.component';
 
 @Component({
   selector: 'app-posts-feed',
@@ -14,7 +17,8 @@ export class PostsFeedComponent implements OnInit {
   constructor(
     private postService: PostService,
     public dialog: MatDialog,
-    private routerLinkService: RouterLinkService
+    private routerLinkService: RouterLinkService,
+    private userService:UserService
   ) {
     if (!this.isPostLiked) this.isPostLiked = [];
     this.postLikeCounter = [];
@@ -24,12 +28,43 @@ export class PostsFeedComponent implements OnInit {
   currUserName!: string | null;
   isPostLiked!: boolean[];
   postLikeCounter: number[];
+  allFriends:User[]=[]
+
+  showFilterPopUp()
+  {
+    const dialogRef = this.dialog.open(FilterComponent);
+    dialogRef.afterClosed().subscribe((filter) => {
+      if(filter){
+        this.postService.filter(filter).subscribe((result) => {
+          console.log(result);
+          this.posts = result;
+          console.log(this.posts);
+          this.posts.forEach((post) => {});
+          this.initLikedPosts();
+          this.initLikedPostNumber();
+        },
+        (error) => {
+          console.log(error);
+        });
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.initList();
     this.currUserName = localStorage.getItem('userName');
     this.listenToNewPost();
+    //this.getAllUsersFriends();
   }
+
+  getAllUsersFriends()
+  {
+    this.userService.getAllFriends(localStorage.getItem('id')).subscribe((res)=>
+    {
+      this.allFriends=res;
+    });
+  }
+
   listenToNewPost() {
     this.routerLinkService.postChange.subscribe((event) => {
       if (event) this.initList();
@@ -50,7 +85,6 @@ export class PostsFeedComponent implements OnInit {
     );
   }
 
-  deletePost() {}
 
   initLikedPosts() {
     var currId = localStorage.getItem('id');
@@ -81,15 +115,7 @@ export class PostsFeedComponent implements OnInit {
     }
   }
 
-  editPost(post: Post) {
-    var dialogRef = this.dialog.open(EditPostComponent, {
-      width: '150px',
-      data: { decription: post.Description },
-    });
-    dialogRef.afterClosed().subscribe((res) => {
-      this.postService.editPost(res);
-    });
-  }
+
 
   addLike(postId: number) {
     this.postService.addLike(postId).subscribe((res) => {

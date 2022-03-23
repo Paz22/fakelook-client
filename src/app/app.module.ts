@@ -33,6 +33,8 @@ import { DatePipe } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FilterComponent } from './components/filter/filter.component';
+import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -53,6 +55,8 @@ const routes: Routes = [
     HomeComponent,
     EditPostComponent,
     ResetPasswordComponent,
+    FilterComponent,
+    UserSettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,6 +81,7 @@ const routes: Routes = [
     MatSelectModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

@@ -21,6 +21,24 @@ export class UserService {
     );
   }
 
+  getAllFriends(id:any)
+  {
+    
+    return this.http.get<any>(`${environment.usersURL}/getAllFriends?blockerId=${id}`);
+  }
+
+  getUserById() 
+  {
+    return this.http.get<User>(`${environment.usersURL}/GetById?id=${localStorage.getItem('id')||""}`);
+  }
+
+  updateUser(user:User)
+  {
+    return this.http.put<User>(`${environment.usersURL}/Put`,user); 
+  }
+
+ 
+
   login(user: User): Observable<any> {
     return this.http.post<any>(`${environment.usersURL}/Login`, user);
   }
