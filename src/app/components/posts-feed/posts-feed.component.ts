@@ -63,6 +63,7 @@ export class PostsFeedComponent implements OnInit {
         this.postService.filter(filter).subscribe(
           (result) => {
             this.posts = result;
+            this.initProfileImages();
             console.log(this.posts);
             this.initLikedPosts();
             this.initLikedPostNumber();
