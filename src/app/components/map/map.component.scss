@@ -36,3 +36,13 @@ img {
     opacity: 1;
   }
 }
+.filter {
+  cursor: pointer;
+  margin-top: 10px;
+  color: white;
+  width: fit-content;
+  border: 1px solid transparent;
+  &:hover {
+    border: 1px solid lightgrey;
+  }
+}

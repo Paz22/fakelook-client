@@ -12,6 +12,11 @@
     row-gap: 10px;
     column-gap: 10px;
     word-wrap: break-word;
+    form {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 10px;
+    }
   }
 }
 

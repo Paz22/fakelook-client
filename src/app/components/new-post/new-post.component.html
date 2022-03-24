@@ -69,7 +69,6 @@
             *ngFor="let friend of userList"
             (click)="userTagChosen(friend)"
           >
-            <img src="{{ friend.profilePic }}" alt="" />
             {{ friend.userName }}
           </mat-list-option>
         </mat-selection-list>

@@ -74,7 +74,7 @@ export class SideBarComponent implements OnInit {
   }
   signOutUser() {
     localStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
     this.checkIfUserIsLogged();
   }
 

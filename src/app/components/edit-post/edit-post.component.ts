@@ -41,14 +41,15 @@ export class EditPostComponent implements OnInit {
   separatorKeysCodes: number[] = [];
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
-  tags: string[] = [''];
+  tags: string[] = [];
   tagsForServer: any[] = [];
-  userTags: string[] = [''];
+  userTags: string[] = [];
   userTagsForServer: any[] = [];
   writingUserTag: boolean;
   userTaggedPost: any[] = [];
   userList: any[] = [];
   allTags: string[] = [];
+  descriptionInput = new FormControl('');
 
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
 
@@ -78,6 +79,7 @@ export class EditPostComponent implements OnInit {
       console.log(result);
       this.post = result;
       this.imgSrc = this.post.imageSorce;
+      this.descriptionInput.setValue(result.description);
       this.post.description = result.description;
       console.log(this.post);
     });
@@ -96,7 +98,14 @@ export class EditPostComponent implements OnInit {
       this.userList = result;
     });
   }
-  removeTag(index: number) {}
+  removeTag(index: number) {
+    const tag = this.tags[index];
+    const indexForServer = this.tagsForServer.indexOf(tag);
+    if (index >= 0) {
+      this.tags.splice(index, 1);
+      this.tagsForServer.splice(indexForServer, 1);
+    }
+  }
 
   inputChanged(event: any) {
     if (event.key == '#') {
@@ -114,10 +123,19 @@ export class EditPostComponent implements OnInit {
     this.post = {} as Post;
     this.post.userId = 1;
     let tag = {} as Tag;
-    tag.content = 'sdklm';
     this.tags = [];
     // this.tags.push(tag);
     this.post.description = '';
+  }
+  removeUserTag(userTag: string) {
+    const index = this.userTags.indexOf(userTag);
+    const indexList = this.userTaggedPost.indexOf(userTag);
+    const indexForServer = this.userTagsForServer.indexOf(userTag);
+    if (index >= 0) {
+      this.userTags.splice(index, 1);
+      this.userTaggedPost.splice(indexList, 1);
+      this.userTagsForServer.splice(indexForServer, 1);
+    }
   }
 
   parsePostDescription(postDescription: string) {
@@ -157,12 +175,10 @@ export class EditPostComponent implements OnInit {
         this.datePipe.transform(currDate, 'yyyy-mm-dd');
         this.post.date = currDate;
         this.post.userId = parseInt(localStorage.getItem('id') || '0');
-
         this.post.IsEdited = false;
         this.post.PermissionLevel = 1;
         this.post.imageSorce = this.imgSrc;
         console.log(this.post);
-
         this.postService.editPost(this.post).subscribe(
           (res) => {
             console.log(res);
@@ -235,7 +251,6 @@ export class EditPostComponent implements OnInit {
         var words = value.split(' ');
         var userTag = words[words.length - 1];
         userTag = userTag.substring(1);
-
         console.log(userTag);
       }
     }
@@ -259,6 +274,7 @@ export class EditPostComponent implements OnInit {
     res.pop(); //remove last element
     this.tagInput.nativeElement.value = res.join(' '); //join back together
     this.userTaggedPost.push({ userId: event.id });
+    this.userTags.push(event.userName);
   }
 
   selected(event: any): void {
