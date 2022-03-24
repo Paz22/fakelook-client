@@ -34,6 +34,9 @@ export class UserService {
       `${environment.usersURL}/GetById?id=${localStorage.getItem('id') || ''}`
     );
   }
+  getUserBySpecificId(id: number) {
+    return this.http.get<User>(`${environment.usersURL}/GetById?id=${id}`);
+  }
 
   updateUser(user: User) {
     return this.http.put<User>(`${environment.usersURL}/Put`, user);

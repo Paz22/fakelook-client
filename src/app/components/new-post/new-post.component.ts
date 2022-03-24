@@ -38,10 +38,9 @@ export class NewPostComponent implements OnInit {
   tagsForServer: any[] = [];
   userTags: string[] = [];
   userTagsForServer: any[] = [];
-  userList: any[] = [];
   writingUserTag: boolean;
   userTaggedPost: any[] = [];
-
+  userList: any[] = [];
   allTags: string[] = [];
 
   @ViewChild('tagInput') tagInput!: ElementRef<HTMLInputElement>;
@@ -108,11 +107,20 @@ export class NewPostComponent implements OnInit {
   ngOnInit(): void {
     this.post = {} as Post;
     this.post.userId = 1;
+    this.initFirstTag();
     let tag = {} as Tag;
     tag.content = 'sdklm';
     this.tags = [];
-    // this.tags.push(tag);
     this.post.description = '';
+  }
+  initFirstTag() {
+    const userName = localStorage.getItem('name');
+    const userId = localStorage.getItem('id');
+    if (userName && userId) {
+      this.userTaggedPost.push({ userId: userId });
+      this.userTags.push(userName);
+      console.log(this.userTags);
+    }
   }
 
   parsePostDescription(postDescription: string) {

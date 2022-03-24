@@ -40,6 +40,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { FilterComponent } from './components/filter/filter.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { FriendsListComponent } from './components/friends-list/friends-list.component';
 
 const routes: Routes = [
   { path: 'main', component: MainComponent },
@@ -63,6 +64,7 @@ const routes: Routes = [
     PostComponent,
     FilterComponent,
     UserSettingsComponent,
+    FriendsListComponent,
   ],
   imports: [
     BrowserModule,

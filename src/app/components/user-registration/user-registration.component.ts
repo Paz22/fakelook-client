@@ -39,7 +39,6 @@ export class UserRegistrationComponent implements OnInit {
       this.userService.addUser(this.user).subscribe(
         (result) => {
           this.signInUser(result);
-
           this.isLoading(false);
         },
         (error) => {

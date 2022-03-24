@@ -1,0 +1,98 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .friends-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightblue;
+    min-width: min-content;
+    padding: 10px;
+    height: 100px;
+    max-width: 300px;
+    background: #eee;
+  }
+
+  .single-user {
+    width: 100px;
+    height: 60px;
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    .username {
+      font-size: 18px;
+      font-weight: 100;
+      color: black;
+    }
+  }
+}
+
+#friend-list {
+  display: block;
+  margin: 0;
+  color: black;
+  padding: 0;
+  width: 150px;
+  max-width: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 10px;
+  height: 400px;
+  background: whitesmoke;
+
+  list-style-type: none;
+}
+
+.friend {
+  width: 150px;
+  height: 60px;
+  transition: 0.5s;
+  background: whitesmoke;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.friend img {
+  width: 35px;
+  height: 35px;
+  border-radius: 30px;
+  border: 1px solid #aaa;
+  object-fit: cover;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.friend .name {
+  font-size: 13px;
+}
+
+.friend.selected img {
+  border-color: white;
+}
+
+.friend:not(.selected):hover {
+  background: #ddd;
+}
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #2b32b2, #1488cc);
+  border-radius: 10px;
+}

@@ -1,29 +1,33 @@
 <div class="main-container">
-  <div class="posts-container">
-    <div class="button-container account" (click)="showFilterPopUp()">
-      <div class="icon-container"><i class="bx bx-filter-alt"></i></div>
-    </div>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <div class="posts-container" *ngIf="!loading">
     <div class="page-title">My Friends Post's</div>
+    <div class="button-container account filter" (click)="showFilterPopUp()">
+      <div class="icon-container"><i class="bx bx-filter-alt"></i> Filter</div>
+    </div>
     <div class="blog_post" *ngFor="let post of posts; let i = index">
       <div class="img_pod">
-        <img
-          src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"
-          alt=""
-        />
+        <img src="{{ images[i] }}" alt="" />
+        <div class="title">{{ names[i] }}</div>
       </div>
+
       <div class="img-post" *ngIf="post.imageSorce">
         <img src="{{ post.imageSorce }}" alt="" />
       </div>
-      <mat-chip-list aria-label="Fish selection">
-        <div class="tags-post" *ngFor="let tag of post.tags">
-          <mat-chip color="accent" selected>{{ tag.content }}</mat-chip>
-        </div>
-        <div class="tags-post" *ngFor="let userTag of post.userTaggedPost">
-          <mat-chip color="primary" selected>{{
-            userTag.user.userName
-          }}</mat-chip>
-        </div>
-      </mat-chip-list>
+      <div class="tag-container">
+        <mat-chip-list aria-label="Fish selection">
+          <div class="tags-post" *ngFor="let tag of post.tags">
+            <mat-chip color="accent" selected>{{ tag.content }}</mat-chip>
+          </div>
+          <div class="tags-post" *ngFor="let userTag of post.userTaggedPost">
+            <mat-chip color="primary" selected>{{
+              userTag.user.userName
+            }}</mat-chip>
+          </div>
+        </mat-chip-list>
+      </div>
 
       <h3>{{ post.date | date: "mediumDate" }}</h3>
       <p>
@@ -52,14 +56,16 @@
             mat-icon-button
             color="primary"
             aria-label="Example icon button with a home icon"
-            (click)="postChosen(post)"
+            (click)="postChosen(post.id)"
           >
             <i class="bx bx-chat"></i>
-            {{ post.comments.length }}
+            <span *ngIf="post">{{ post.comments.length }}</span>
           </button>
         </div>
       </div>
     </div>
   </div>
-  <div class="friends-list-container">FriendsList</div>
+  <div class="friends-list-container">
+    <app-friends-list (newItemEvent)="initImages($event)"></app-friends-list>
+  </div>
 </div>

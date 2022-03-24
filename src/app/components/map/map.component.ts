@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import {
@@ -11,6 +12,7 @@ import Filter from 'src/app/Model/Filter';
 import Post from 'src/app/Model/Post';
 import { PostService } from 'src/app/services/post.service';
 import { FilterComponent } from '../filter/filter.component';
+import { PostComponent } from '../post/post.component';
 
 @Component({
   selector: 'app-map',
@@ -29,7 +31,8 @@ export class MapComponent implements OnInit {
     private postService: PostService,
     private viewerConf: ViewerConfiguration,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private bottomSheet: MatBottomSheet
   ) {
     viewerConf.viewerOptions = {
       selectionIndicator: false,
@@ -96,15 +99,20 @@ export class MapComponent implements OnInit {
   }
 
   showFullPost(post: Post): void {
-    this.showDialog = true;
-    this.selectedPost = post;
+    const bottomSheetRef = this.bottomSheet.open(PostComponent, {
+      data: { id: post.id },
+    });
+    bottomSheetRef.afterDismissed().subscribe(() => {
+      console.log('Bottom sheet has been dismissed.');
+    });
   }
   closeDialog(): void {
     this.showDialog = false;
   }
   softGuard() {
     if (!localStorage.getItem('token')) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/home']);
+      console.log('here');
     }
   }
 }

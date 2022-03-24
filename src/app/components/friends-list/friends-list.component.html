@@ -1,0 +1,32 @@
+<div class="main-container">
+  <h1>Friends List</h1>
+  <div class="spinner-container" *ngIf="loading">
+    <mat-spinner></mat-spinner>
+  </div>
+  <ul id="friend-list">
+    <li class="friend" *ngFor="let user of allUsers">
+      <img src="{{ user.profilePic }}" />
+      <div class="name" *ngIf="user.userName != currentName">
+        {{ user.userName }}
+      </div>
+      <div class="name" *ngIf="user.userName == currentName"><b>You</b></div>
+    </li>
+  </ul>
+</div>
+<!-- 
+<div class="friends-list-container" *ngIf="!loading">
+  <div class="single-user" *ngFor="let user of allUsers">
+    {{ user.userName }}
+    <br />
+    <img
+      *ngIf="user.profilePic"
+      src="{{ user.profilePic }}"
+      alt="User Profile Pic"
+    />
+    <img
+      *ngIf="!user.profilePic"
+      src="{{ img }}"
+      alt="User Profile Pic Not Found"
+    />
+  </div>
+</div> -->

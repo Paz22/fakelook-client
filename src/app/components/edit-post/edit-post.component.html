@@ -31,8 +31,16 @@
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
+          <mat-chip
+            *ngFor="let usertag of userTags; let i = index"
+            (removed)="removeUserTag(usertag)"
+          >
+            {{ usertag }}
+            <button matChipRemove (click)="removeUserTag(usertag)">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
           <input
-            matInput
             placeholder="Description"
             id="Description"
             [(ngModel)]="post.description"

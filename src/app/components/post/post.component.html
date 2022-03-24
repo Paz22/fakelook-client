@@ -1,38 +1,52 @@
-<div class="edit-title" *ngIf="Editable" (click)="editPost(post.id)">
-  <h4>Editable <i class="bx bxs-edit-alt"></i></h4>
+<div class="title-container">
+  <div class="user">
+    <img src="{{ writer.profilePic }}" />
+    <div class="name">
+      {{ writer.userName }}
+    </div>
+  </div>
+  <div class="edit-title" *ngIf="Editable" (click)="editPost(post.id)">
+    <h4>Editable <i class="bx bxs-edit-alt"></i></h4>
+  </div>
 </div>
-<div class="main-container">
+<div class="spinner-container" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+
+<div class="main-container" *ngIf="!loading">
   <div class="card">
     <img src="{{ post.imageSorce }}" alt="Avatar" style="width: 100%" />
     <div class="container">
       <h4>
-        <b>{{ post.date }}</b>
+        <b>{{ post.date | date: "mediumDate" }}</b>
       </h4>
       <p>{{ post.description }}</p>
     </div>
   </div>
-  <mat-accordion>
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Click To Show Comments </mat-panel-title>
-      </mat-expansion-panel-header>
-      <p>
-        <mat-form-field class="example-full-width" appearance="legacy">
-          <mat-label>Add Comment</mat-label>
-          <input
-            (keydown.enter)="addComment()"
-            type="text"
-            matInput
-            [(ngModel)]="commentVal"
-          />
-          <i class="mdi mdi-1emp mdi-message-outline form-icon" matSuffix></i>
-        </mat-form-field>
-      </p>
-      <p *ngFor="let comment of post.comments">
-        ... Says: {{ comment.content }}
-      </p>
-    </mat-expansion-panel>
-  </mat-accordion>
+  <div class="second-section-container">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Click To Show Comments </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>
+          <mat-form-field class="example-full-width" appearance="legacy">
+            <mat-label>Add Comment</mat-label>
+            <input
+              (keydown.enter)="addComment()"
+              type="text"
+              matInput
+              [(ngModel)]="commentVal"
+            />
+            <i class="mdi mdi-1emp mdi-message-outline form-icon" matSuffix></i>
+          </mat-form-field>
+        </p>
+        <p *ngFor="let comment of post.comments">
+          <b>{{ comment.user.userName }}</b> Says: {{ comment.content }}
+        </p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 </div>
 
 <!-- ---------------------------------------------------------------------------------------------------- -->

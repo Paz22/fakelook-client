@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { Router } from '@angular/router';
 import {
   AcNotification,
   ActionType,
@@ -17,8 +19,18 @@ import { PostService } from 'src/app/services/post.service';
 export class MainComponent implements OnInit {
   constructor(
     private postService: PostService,
-    private viewerConf: ViewerConfiguration
+    private viewerConf: ViewerConfiguration,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.softGuard();
+  }
+
+  softGuard() {
+    if (!localStorage.getItem('token')) {
+      this.router.navigate(['/home']);
+      console.log('here');
+    }
+  }
 }
